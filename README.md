@@ -1,7 +1,7 @@
 # Projeto Sistema de Gestão de Estacionamento
-Projeto Final da Disciplina Banco Dados II - Grupo D
+## Projeto Final da Disciplina Banco Dados II - Grupo D
 
-Integrantes:
+### Integrantes:
  - https://github.com/DouglasKuerten
  - https://github.com/BrunoDimon
  - https://github.com/thiagoDimon
@@ -10,26 +10,17 @@ Integrantes:
  - https://github.com/Freitas86
  - https://github.com/JorgeAntonioJr
  - https://github.com/Aleson00
+ - https://github.com/Rocha101
 
-Modelo Físico:
-Utilizado https://dbdiagram.io/
-Arquivo fonte: link pro arquivo
-Imagem
+### Modelo Físico:
 
-Dicionário de Dados:
-Excel ou tabela do Github (markdown)
+### Dicionário de Dados:
 
-Scripts DDL Criação do Database:
-Banco de dados utilizado SQL Server versão 2022 - Azure.
-1 arquivo SQL por objeto
+### Scripts DDL Criação do Database:
 
-Scripts Popula tabelas:
-Banco de dados utilizado SQL Server versão 2022 - Azure.
-1 arquivo SQL por objeto
+### Scripts Popula tabelas:
 
-Objetos de BD (stored procedure, triggers e functions):
-1 arquivo SQL por objeto
+### Objetos de BD (stored procedure, triggers e functions):
 
-Código do sistema:
-Linguagem de Programação C# .NET.
-código fonte da aplicação
+### Código do sistema:
+
