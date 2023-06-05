@@ -6,6 +6,7 @@ import PaymentVehicle from "./screens/PaymentVehicle";
 import { BsArrowLeftShort, BsXCircle, BsPinFill, BsExclamationCircle, BsBookmarkPlus, BsPersonBadge, BsBookmarkDash, BsCashCoin, BsPeople, BsFiletypePdf, BsGear } from "react-icons/bs"
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import NotFound from "./screens/NotFound";
+import Report from "./screens/Report";
 
 export default function App() {
   const [open, setOpen] = useState(true);
@@ -15,7 +16,7 @@ export default function App() {
     { title: "Preços", spacing: true, icon: <BsCashCoin />, href: "/precos" },
     { title: "Funcionários", spacing: true, icon: <BsPersonBadge />, href: "/funcionarios" },
     { title: "Clientes", icon: <BsPeople /> },
-    { title: "Relatorio", spacing: true, icon: <BsFiletypePdf /> },
+    { title: "Relatorio", spacing: true, icon: <BsFiletypePdf />, href: "/relatorio" },
     { title: "Configurações", icon: <BsGear />, spacing: true },
     { title: "Sair", icon: <BsXCircle /> },
   ]
@@ -53,6 +54,8 @@ export default function App() {
               <Route path="/entradaVeiculo" element={<EntryVehicle />} />
               <Route path="/saidaVeiculo" element={<ExitVehicle />} />
               <Route path="/saidaVeiculo/resumoPagamentoVeiculo" element={<PaymentVehicle />} />
+
+              <Route path="/relatorio" element={<Report />} />
 
 
               <Route path="*" element={<NotFound />} />
