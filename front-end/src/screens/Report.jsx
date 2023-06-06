@@ -10,7 +10,7 @@ export default function Report() {
 
     return (
         <div >
-            <Button onClick={() => setOpen(true)}>Relatório de Exemplo</Button>
+            <Button onClick={() => setOpen(true)}>Relatório de Veículos</Button>
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={() => setOpen(false)}>
                     <Transition.Child
@@ -38,7 +38,7 @@ export default function Report() {
                                 <Dialog.Panel className="flex flex-col h-full w-full max-w-5xl transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all">
                                     <div className="flex flex-col w-full h-full text-center bg-white px-4 pt-5">
                                         <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                                            Relatório de Exemplo
+                                            Relatório de Veículos
                                         </Dialog.Title>
                                         <PDFViewer className='flex h-full w-full p-5'>
                                             <DayParking />
