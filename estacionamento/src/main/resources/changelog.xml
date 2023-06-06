@@ -1,13 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?>   
+<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
-    <changeSet id="1" author="your_name">
-        <createTable tableName="example_table">
-            <column name="id" type="int" autoIncrement="true" primaryKey="true"/>
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Gustavo">
+        <createTable tableName="users">
+            <column name="id" type="bigint" autoIncrement="true"/>
             <column name="name" type="varchar(255)"/>
-            <!-- Add more columns or modifications as needed -->
         </createTable>
+
+        <insert tableName="users">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="John Doe"/>
+        </insert>
     </changeSet>
+<!--    <changeSet author="Gustavo" id="tables">
+        <sqlFile path="changelogs/tables.sql"/>
+    </changeSet>-->
+<!--    <changeSet author="Gustavo" id="inserts">
+        <sqlFile path="changelogs/inserts.sql" splitStatements="false"/>
+    </changeSet>-->
+<!--    <changeSet author="Gustavo" id="functions">
+        <sqlFile path="changelog/changelog-1.0.0.sql" splitStatements="false"/>
+    </changeSet>
+    <changeSet author="Gustavo" id="index">
+        <sqlFile path="changelog/createViews.sql" splitStatements="false"/>
+    </changeSet> 
+    <changeSet author="Gustavo" id="triggers">
+        <sqlFile path="changelog/index.sql" splitStatements="false"/>
+    </changeSet> 
+    <changeSet author="Gustavo" id="procs">
+        <sqlFile path="changelog/insertBalance.sql" splitStatements="false"/>
+    </changeSet>-->
 </databaseChangeLog>
