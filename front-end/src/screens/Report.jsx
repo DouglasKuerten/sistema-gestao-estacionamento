@@ -8,6 +8,16 @@ import DayParking from '../reports/DayParking';
 export default function Report() {
     const [open, setOpen] = useState(false)
 
+    //como acessar a api
+    //console.log(axios.get('http://localhost:5555/users')
+    //.then(response => {
+    //  const data = response.data;
+    //  console.log(data);
+    // })
+    //.catch(error => {
+   //console.error(error);
+   // }));
+
     return (
         <div >
             <Button onClick={() => setOpen(true)}>Relatório de Veículos</Button>
