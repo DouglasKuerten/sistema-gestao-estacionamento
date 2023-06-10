@@ -13,7 +13,7 @@
  - https://github.com/Rocha101
 
 ### Modelo Físico:
-
+https://dbdiagram.io/d/647a7c0c722eb774944f750a
 ### Dicionário de Dados:
 
 ### Scripts DDL Criação do Database:
