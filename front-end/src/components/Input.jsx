@@ -1,9 +1,11 @@
+
 export default function Input(props) {
     return (
         <div className="sm:col-span-4">
-            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-                {props.label}
+            <label className="block text-sm font-medium leading-6 text-gray-900">
+                {props.label} {props.required && <a className={'text-red-600'}>*</a>}
             </label>
+
             <div className="mt-2">
                 <input
                     type={props.type}
