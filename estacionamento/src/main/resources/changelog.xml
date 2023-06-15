@@ -3,12 +3,12 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <changeSet author="Gustavo" id="tables">
+    <changeSet author="Gustavo" id="teste">
         <sqlFile path="changelogs/tables.sql"/>
     </changeSet>
-    <changeSet author="Gustavo" id="inserts">
+<!--    <changeSet author="Gustavo" id="inserts">
         <sqlFile path="changelogs/inserts.sql"/>
-    </changeSet>
+    </changeSet>-->
 <!--    <changeSet author="Gustavo" id="functions">
         <sqlFile path="changelog/changelog-1.0.0.sql"/>
     </changeSet>
