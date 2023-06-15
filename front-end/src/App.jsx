@@ -3,11 +3,12 @@ import { useState } from "react";
 import EntryVehicle from "./screens/EntryVehicle";
 import ExitVehicle from "./screens/ExitVehicle";
 import PaymentVehicle from "./screens/PaymentVehicle";
-import { BsArrowLeftShort, BsXCircle, BsPinFill, BsExclamationCircle, BsBookmarkPlus, BsPersonBadge, BsBookmarkDash, BsCashCoin, BsPeople, BsFiletypePdf, BsGear } from "react-icons/bs"
+import { BsArrowLeftShort, BsXCircle, BsPinFill, BsExclamationCircle, BsBookmarkPlus, BsPersonBadge, BsBookmarkDash, BsCashCoin, BsPeople, BsFiletypePdf, BsGear, BsCarFront } from "react-icons/bs"
 import { BrowserRouter as Router, Route, NavLink, Routes } from "react-router-dom";
 import NotFound from "./screens/NotFound";
 import Report from "./screens/Report";
 import UnderDevelopment from "./screens/UnderDevelopment";
+import ParkedVehicles from "./screens/ParkedVehicles";
 
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
   const Menus = [
     { title: "Entrada Veículo", icon: <BsBookmarkPlus />, href: "/entradaVeiculo" },
     { title: "Saída Veículo", icon: <BsBookmarkDash />, href: "/saidaVeiculo" },
+    { title: "Veículos Estacionados", icon: <BsCarFront />, href: "/veiculosEstacionados" },
     { title: "Preços", spacing: true, icon: <BsCashCoin />, href: "/precos" },
     { title: "Funcionários", spacing: true, icon: <BsPersonBadge />, href: "/funcionarios" },
     { title: "Clientes", icon: <BsPeople />, href: "/clientes" },
@@ -59,6 +61,7 @@ export default function App() {
               <Route path="/" />
               <Route path="/entradaVeiculo" element={<EntryVehicle />} />
               <Route path="/saidaVeiculo" element={<ExitVehicle />} />
+              <Route path="/veiculosEstacionados" element={<ParkedVehicles />} />
               <Route path="/saidaVeiculo/resumoPagamentoVeiculo" element={<PaymentVehicle />} />
               <Route path="/precos" element={<UnderDevelopment />} />
               <Route path="/funcionarios" element={<UnderDevelopment />} />
