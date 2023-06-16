@@ -14,9 +14,11 @@
 
 ### Modelo Físico:
 https://dbdiagram.io/d/647a7c0c722eb774944f750a
+
 ### Dicionário de Dados:
 
 ### Scripts DDL Criação do Database:
+https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento/src/main/resources/changelogs
 
 ### Scripts Popula tabelas:
 
