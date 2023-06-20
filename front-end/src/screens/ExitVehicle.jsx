@@ -14,10 +14,10 @@ export default function ExitVehicle() {
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12">
                         <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Placa" placeholder="" />
+                            <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Placa" placeholder="" required={true} />
                             <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Modelo" placeholder="" disabled />
                             <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Cor" placeholder="" disabled />
-                            <Input type="datetime-local" name="cliente" id="cliente" autoComplete="off" label="Data/Hora Saída" placeholder="" />
+                            <Input type="datetime-local" name="cliente" id="cliente" autoComplete="off" label="Data/Hora Saída" placeholder="" required={true} />
                             <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Cliente" placeholder="" disabled />
 
                         </div>

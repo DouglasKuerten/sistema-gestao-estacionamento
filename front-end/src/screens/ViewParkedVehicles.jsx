@@ -48,7 +48,7 @@ const VeiculosEstacionados = [
     },
 ];
 
-export default function ParkedVehicles() {
+export default function ViewParkedVehicles() {
     function calcularTempoDecorrido(dataEntrada) {
         var dataAtual = new Date();
         var diferenca = dataAtual - new Date(dataEntrada);
@@ -64,8 +64,8 @@ export default function ParkedVehicles() {
             <div className="pb-8">
                 <h1 className="text-2xl font-semibold">Veículos Estacionados</h1>
             </div>
-            <div class="w-full mb-4 px-4 mx-auto mt-2">
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+            <div class="w-full mb-4 px-4 mx-auto mt-2 ">
+                <div class="flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
                     <div class="rounded-t mb-0 px-4 py-3 border-0">
                         <div class="flex flex-wrap items-center">
                             <div class="relative w-full px-4 max-w-full flex-grow flex-1">
