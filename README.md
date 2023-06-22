@@ -16,6 +16,7 @@
 <code>[Modelo Físico Banco](https://dbdiagram.io/d/647a7c0c722eb774944f750a)</code>
 
 ### Dicionário de Dados:
+<code>[Criar Banco de Dados](https://1drv.ms/x/s!AqDCvxmFwj5whfxT9cyz3GpUQ2C55Q?e=Qt8Jjc)</code>
 
 ### Criação do Banco:
 <code>[Criar Banco de Dados](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/docker/run.bat)</code>
