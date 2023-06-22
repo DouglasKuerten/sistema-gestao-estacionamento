@@ -30,6 +30,47 @@
 
 ### Código do sistema:
 
+### Perguntas
+
+* Qual é o número total de vagas disponíveis em um determinado estacionamento?
+
+Solução em SQL:
+<code>
+SELECT vagas_disponiveis
+FROM estacionamento
+WHERE estacionamento_id = <id_do_estacionamento>;
+</code>
+
+* Pergunta: Quais são os funcionários que ocupam o cargo de "Gerente"?
+
+Solução em SQL:
+<code>
+SELECT nome
+FROM funcionarios
+WHERE cargo = 'Gerente';
+</code>
+
+* Pergunta: Quais são os veículos registrados por um determinado cliente?
+
+Solução em SQL:
+<code>
+SELECT v.modelo, v.placa
+FROM veiculo v
+INNER JOIN cliente c ON v.cliente_id = c.cliente_id
+WHERE c.cliente_id = <id_do_cliente>
+</code>
+
+* Pergunta: Quais são os clientes que possuem reservas ativas no momento?
+
+Solução em SQL:
+<code>
+SELECT c.nome
+FROM cliente c
+INNER JOIN reserva r ON c.cliente_id = r.cliente_id
+WHERE r.data_hora_inicio <= CURRENT_TIMESTAMP
+AND r.data_hora_fim >= CURRENT_TIMESTAMP;
+</code>
+
 
 
 
