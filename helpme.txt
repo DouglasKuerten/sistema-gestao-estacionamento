@@ -1,0 +1,58 @@
+-------------Entrada Veículo------------- Insert
+
+entrou na tela
+informou a placa
+	se tem placa no banco
+		traz pro front:
+			o modelo
+			a cor
+			relaciona o id cliente do veiculo com a tabela de cliente e pega o nome dele
+	se não tem placa no banco
+		no botão salvar
+			salva as informações colocadas na tela e o status como E (Estacionado)
+
+
+-------------fechamento dos cadastros automaticos-------------
+
+
+-------------Saida de Veículo------------- Update
+
+Informa a placa
+	Traz pro front
+		Modelo
+		Cor
+		Cliente
+	Botão encerrar
+		Altera o status para A (Aguardando Pagamento)
+
+
+-------------Resumo Pagamento-------------
+
+Passa a placa pro banco
+No banco traz pro front:
+	Modelo
+	Cor
+	Placa
+	Cliente
+	Periodo Estacionado (data entrada - data saida)
+	Data Entrada
+	Data Saida
+	Valor Total
+	
+	Se apertar no botão Finalizar 
+		Muda o status para F (Finalizado)
+	Se apertar no botão Cancelar
+		Muda o status para E (Estacionado) e remove o campo data_saida 
+	
+
+Status
+
+------Veiculos estacionados --------
+no banco trazer um select placa, modelo, data de entrada, cliente, bloco(se tiver, só vai existir se for socio)
+
+
+------- Relatorio ---------
+tem q ser stored procedure
+ranking de horas estacionadas, recebera duas datas( entrada e saida) e devera retornar placa, modelo, cliente, tempo decorrido, e valor.
+Nesse select devera trazer as reservas que tem status F (finalizados), devera ter um order by, por tempo decorrido
+tem que ter posição do rank
