@@ -1,7 +1,8 @@
 package satc.estacionamento.entityDTO;
 
-import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -13,15 +14,18 @@ import lombok.NoArgsConstructor;
  * @author gusta
  */
 @Entity
-@Table(name = "entrada_saida")
+@Table(name = "bloco")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntradaSaida extends MasterEntity{
+public class Bloco{
+    @Id
+    private long idBloco;
     @ManyToOne
+    @JoinColumn(name = "id_estacionamento")
     private Estacionamento estacionamento;
-    @ManyToOne
-    private Veiculo veiculo;
-    private LocalDate dataHoraEntrada;
-    private LocalDate dataHoraSaida;
+    private String dsNome;
+    private String dsSigla;
+    private Long vagasTotais;
+    private String descricao;
 }

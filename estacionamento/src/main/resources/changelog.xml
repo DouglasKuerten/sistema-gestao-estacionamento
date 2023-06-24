@@ -3,22 +3,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <changeSet author="Gustavo" id="teste">
-        <sqlFile path="changelogs/tables.sql"/>
-    </changeSet>
+    <includeAll path="liquibase/changelogs/tables/*.sql"/>
 <!--    <changeSet author="Gustavo" id="inserts">
-        <sqlFile path="changelogs/inserts.sql"/>
-    </changeSet>-->
-<!--    <changeSet author="Gustavo" id="functions">
-        <sqlFile path="changelog/changelog-1.0.0.sql"/>
-    </changeSet>
-    <changeSet author="Gustavo" id="index">
-        <sqlFile path="changelog/createViews.sql"/>
-    </changeSet> 
-    <changeSet author="Gustavo" id="triggers">
-        <sqlFile path="changelog/index.sql"/>
-    </changeSet> 
-    <changeSet author="Gustavo" id="procs">
-        <sqlFile path="changelog/insertBalance.sql"/>
+        <sqlFile path="changelogs/inserts.sql"  splitStatements="true"/>
     </changeSet>-->
 </databaseChangeLog>

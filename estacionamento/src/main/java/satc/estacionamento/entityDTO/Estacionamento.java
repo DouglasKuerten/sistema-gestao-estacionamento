@@ -1,6 +1,7 @@
 package satc.estacionamento.entityDTO;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Estacionamento extends MasterEntity{
-    private String nome;
-    private String endereco;
-    private long vagasTotais;
-    private long vagasDisponiveis;
+public class Estacionamento{
+    @Id
+    private long idEstacionamento;
+    private String dsNome;
+    private String dsSigla;
+    private Long vagasTotais; 
 }

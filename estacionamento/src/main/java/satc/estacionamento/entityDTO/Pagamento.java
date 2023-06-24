@@ -1,7 +1,8 @@
 package satc.estacionamento.entityDTO;
 
-import java.time.LocalDate;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -17,9 +18,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pagamento extends MasterEntity {
+public class Pagamento{
+    @Id
+    private long idPagamento;
     @ManyToOne
+    @JoinColumn(name = "id_reserva")
     private Reserva reserva;
-    private long valor;
-    private LocalDate dataHora;
+    @ManyToOne
+    @JoinColumn(name = "id_socio")
+    private Socio socio;
+    private Long valor;
 }

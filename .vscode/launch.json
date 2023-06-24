@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Estacionamento<estacionamento>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "satc.estacionamento.Estacionamento",
+            "projectName": "estacionamento",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
