@@ -33,4 +33,7 @@
     <changeSet author="Gustavo" id="insert">
         <sqlFile path="changelogs/inserts.sql"/>
     </changeSet>
+    <changeSet author="Gustavo" id="valorTarifaa">
+        <sqlFile path="changelogs/valorTarifa.sql" splitStatements="false"/>
+    </changeSet>
 </databaseChangeLog>
