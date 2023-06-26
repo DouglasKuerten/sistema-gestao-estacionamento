@@ -30,7 +30,7 @@ Informa a placa(placaRetornaDados)
 -------------Resumo Pagamento-------------
 
 Passa a placa pro banco (PlacaRetornaVeiculoClienteReserva/{PLACA} ; Retorna tudo relacionado a placa pegar a data saída com base na hr atual)
-(Por enqt TarifaPeloBloco/{Bloco} com o valor do bloco retornado pelo json anterior e fazer o calculo com o preço_hora com o valor de data_entrada e data_saida(hora atual))
+(valorTarifa/{reserva}-{bloco})
 No banco traz pro front:
 	Modelo
 	Cor
@@ -51,7 +51,7 @@ Status
 
 ------Veiculos estacionados --------
 no banco trazer um select placa, modelo, data de entrada, cliente, bloco(se tiver, só vai existir se for socio)
-
+(veiculosEstacionados)
 
 ------- Relatorio ---------
 tem q ser stored procedure
