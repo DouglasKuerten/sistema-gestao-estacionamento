@@ -1,10 +1,11 @@
 satc\estacionamento\entityDTO\Pagamento.class
-satc\estacionamento\UserController.class
+satc\estacionamento\entityDTO\TipoSocio.class
 satc\estacionamento\DatabaseConfig.class
 satc\estacionamento\entityDTO\Tarifa.class
 satc\estacionamento\entityDTO\Reserva.class
 satc\estacionamento\Estacionamento.class
-satc\estacionamento\CorsConfiguration.class
 satc\estacionamento\entityDTO\Estacionamento.class
 satc\estacionamento\entityDTO\Veiculo.class
 satc\estacionamento\entityDTO\Cliente.class
+satc\estacionamento\entityDTO\Bloco.class
+satc\estacionamento\entityDTO\Socio.class

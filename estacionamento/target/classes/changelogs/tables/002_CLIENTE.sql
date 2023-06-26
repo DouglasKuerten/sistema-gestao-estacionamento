@@ -6,7 +6,7 @@
 --------------------------------------------------------
 
   CREATE TABLE "CLIENTE" 
-   (	"ID_CLIENTE" NUMBER(*,0), 
+   (	"ID_CLIENTE" NUMBER GENERATED ALWAYS AS IDENTITY, 
 	"DS_NOME" VARCHAR2(120), 
 	"DS_TELEFONE" VARCHAR2(15), 
 	"DS_EMAIL" VARCHAR2(50), 
@@ -16,16 +16,9 @@
 
    COMMENT ON COLUMN "CLIENTE"."ID_CLIENTE" IS 'PK Veiculo';
    COMMENT ON TABLE "CLIENTE"  IS 'Cadastro de Clientes';
---------------------------------------------------------
---  DDL for Index CLIENTE_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "CLIENTE_PK" ON "CLIENTE" ("ID_CLIENTE") 
   ;
 --------------------------------------------------------
 --  Constraints for Table CLIENTE
 --------------------------------------------------------
-
-  ALTER TABLE "CLIENTE" MODIFY ("ID_CLIENTE" NOT NULL ENABLE);
   ALTER TABLE "CLIENTE" ADD CONSTRAINT "CLIENTE_PK" PRIMARY KEY ("ID_CLIENTE")
   USING INDEX  ENABLE;

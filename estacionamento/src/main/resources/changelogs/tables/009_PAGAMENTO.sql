@@ -6,7 +6,7 @@
 --------------------------------------------------------
 
   CREATE TABLE "PAGAMENTO" 
-   (	"ID_PAGAMENTO" NUMBER(*,0), 
+   (	"ID_PAGAMENTO" NUMBER GENERATED ALWAYS AS IDENTITY, 
 	"ID_RESERVA" NUMBER(*,0), 
 	"ID_SOCIO" NUMBER(*,0), 
 	"VALOR" NUMBER(9,2)
@@ -16,16 +16,8 @@
    COMMENT ON COLUMN "PAGAMENTO"."ID_RESERVA" IS 'FK Reserva';
    COMMENT ON COLUMN "PAGAMENTO"."ID_SOCIO" IS 'FK Socio';
 --------------------------------------------------------
---  DDL for Index PAGAMENTO_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "PAGAMENTO_PK" ON "PAGAMENTO" ("ID_PAGAMENTO") 
-  ;
---------------------------------------------------------
 --  Constraints for Table PAGAMENTO
 --------------------------------------------------------
-
-  ALTER TABLE "PAGAMENTO" MODIFY ("ID_PAGAMENTO" NOT NULL ENABLE);
   ALTER TABLE "PAGAMENTO" ADD CONSTRAINT "PAGAMENTO_PK" PRIMARY KEY ("ID_PAGAMENTO")
   USING INDEX  ENABLE;
 --------------------------------------------------------

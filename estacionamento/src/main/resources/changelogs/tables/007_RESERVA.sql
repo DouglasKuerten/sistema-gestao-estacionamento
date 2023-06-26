@@ -6,7 +6,7 @@
 --------------------------------------------------------
 
   CREATE TABLE "RESERVA" 
-   (	"ID_RESERVA" NUMBER(*,0), 
+   (	"ID_RESERVA" NUMBER GENERATED ALWAYS AS IDENTITY, 
 	"ID_BLOCO" NUMBER(*,0), 
 	"DT_INICIO" DATE, 
 	"DT_FIM" DATE, 
@@ -18,16 +18,8 @@
    COMMENT ON COLUMN "RESERVA"."ID_BLOCO" IS 'FK Bloco';
    COMMENT ON COLUMN "RESERVA"."ID_VEICULO" IS 'FK Veiculo';
 --------------------------------------------------------
---  DDL for Index RESERVA_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "RESERVA_PK" ON "RESERVA" ("ID_RESERVA") 
-  ;
---------------------------------------------------------
 --  Constraints for Table RESERVA
 --------------------------------------------------------
-
-  ALTER TABLE "RESERVA" MODIFY ("ID_RESERVA" NOT NULL ENABLE);
   ALTER TABLE "RESERVA" ADD CONSTRAINT "RESERVA_PK" PRIMARY KEY ("ID_RESERVA")
   USING INDEX  ENABLE;
 --------------------------------------------------------

@@ -1,6 +1,7 @@
 package satc.estacionamento;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,18 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
  * @author gusta
  */
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/veiculos")
+public class RetornaVeiculos {
     private final JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    public UserController(JdbcTemplate jdbcTemplate) {
+    
+    public RetornaVeiculos(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @GetMapping
-    public String getUsers() {
-        String sql = "SELECT * FROM users";
-        return jdbcTemplate.queryForList(sql).toString();
+    public List<Map<String, Object>> getDadosVeiculoCliente() {
+        String sql = "SELECT * FROM veiculo";
+        return jdbcTemplate.queryForList(sql);
     }
 }

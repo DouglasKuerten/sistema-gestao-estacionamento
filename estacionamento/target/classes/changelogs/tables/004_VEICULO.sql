@@ -6,7 +6,7 @@
 --------------------------------------------------------
 
   CREATE TABLE "VEICULO" 
-   (	"ID_VEICULO" NUMBER(*,0), 
+   (	"ID_VEICULO" NUMBER GENERATED ALWAYS AS IDENTITY, 
 	"DS_PLACA" VARCHAR2(10), 
 	"DS_MODELO" VARCHAR2(50), 
 	"DS_COR" VARCHAR2(20), 
@@ -18,16 +18,8 @@
    COMMENT ON COLUMN "VEICULO"."ID_CLIENTE" IS 'FK Cliente';
    COMMENT ON TABLE "VEICULO"  IS 'Cadastro de Veiculo';
 --------------------------------------------------------
---  DDL for Index VEICULO_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "VEICULO_PK" ON "VEICULO" ("ID_VEICULO") 
-  ;
---------------------------------------------------------
 --  Constraints for Table VEICULO
 --------------------------------------------------------
-
-  ALTER TABLE "VEICULO" MODIFY ("ID_VEICULO" NOT NULL ENABLE);
   ALTER TABLE "VEICULO" ADD CONSTRAINT "VEICULO_PK" PRIMARY KEY ("ID_VEICULO")
   USING INDEX  ENABLE;
 --------------------------------------------------------

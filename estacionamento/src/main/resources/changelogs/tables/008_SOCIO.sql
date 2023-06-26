@@ -6,7 +6,7 @@
 --------------------------------------------------------
 
   CREATE TABLE "SOCIO" 
-   (	"ID_SOCIO" NUMBER(*,0), 
+   (	"ID_SOCIO" NUMBER GENERATED ALWAYS AS IDENTITY, 
 	"ID_CLIENTE" NUMBER(*,0), 
 	"ID_TIPOS" NUMBER(*,0), 
 	"STATUS" VARCHAR2(1) DEFAULT 'A', 
@@ -20,16 +20,8 @@
    COMMENT ON COLUMN "SOCIO"."STATUS" IS '[A - Ativo/I - Invativo]';
    COMMENT ON TABLE "SOCIO"  IS 'Cadastro de Socios';
 --------------------------------------------------------
---  DDL for Index SOCIO_PK
---------------------------------------------------------
-
-  CREATE UNIQUE INDEX "SOCIO_PK" ON "SOCIO" ("ID_SOCIO") 
-  ;
---------------------------------------------------------
 --  Constraints for Table SOCIO
 --------------------------------------------------------
-
-  ALTER TABLE "SOCIO" MODIFY ("ID_SOCIO" NOT NULL ENABLE);
   ALTER TABLE "SOCIO" ADD CONSTRAINT "SOCIO_PK" PRIMARY KEY ("ID_SOCIO")
   USING INDEX  ENABLE;
 --------------------------------------------------------
