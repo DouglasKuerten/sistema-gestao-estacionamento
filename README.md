@@ -19,10 +19,10 @@
 <code>[Criar Dicionário de dados](https://1drv.ms/x/s!AqDCvxmFwj5whfxT9cyz3GpUQ2C55Q?e=Qt8Jjc)</code>
 
 ### Criação do Banco:
-<code>[Criar Banco de Dados](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/docker/run.bat)</code>
+<code>[Criar Banco de Dados](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento/docker)</code>
 
 ### Scripts DDL Criação das Tabelas:
-<code>[Criar Tabelas](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/src/main/resources/changelogs/tables.sql)</code>
+<code>[Criar Tabelas](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento/src/main/resources/changelogs/tables)</code>
 
 ### Scripts Popula tabelas:
 <code>[Popular Tabelas](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/src/main/resources/changelogs/inserts.sql)</code>
@@ -31,11 +31,11 @@
 
 ### Código do sistema:
 ##### &nbsp;&nbsp;[Banco](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/6e67233a-e444-4188-9380-0e431d531db4)](https://www.oracle.com/)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/6e67233a-e444-4188-9380-0e431d531db4)](https://www.oracle.com/)&nbsp;&nbsp;&nbsp;
+[![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/794ca41d-7d7f-4d08-9587-82848345802f)](https://www.docker.com/)
 
 ##### &nbsp;&nbsp;[Back-End](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento)
 [![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/62ddedea-f767-4de7-a7c3-35ac990582e2)](https://www.java.com/) &nbsp;&nbsp;&nbsp;
-[![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/794ca41d-7d7f-4d08-9587-82848345802f)](https://www.docker.com/)
 [![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/30bb9c91-9b6a-4670-97cb-972a54f0f6ef)](https://www.liquibase.org/) &nbsp;&nbsp;&nbsp;
 [![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/74aba762-0d0c-465f-8d92-82e586bf6dff)](https://spring.io/) &nbsp;&nbsp;&nbsp;
 
