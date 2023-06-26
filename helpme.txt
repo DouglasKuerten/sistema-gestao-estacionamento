@@ -2,13 +2,14 @@
 
 entrou na tela
 informou a placa
-	se tem placa no banco
+	se tem placa no banco (placaRetornaDados)
 		traz pro front:
 			o modelo
 			a cor
 			relaciona o id cliente do veiculo com a tabela de cliente e pega o nome dele
+			(ReservaController com o id do veiculo);
 	se não tem placa no banco
-		no botão salvar
+		no botão salvar(ClienteController, VeiculoController e dps ReservaController)
 			salva as informações colocadas na tela e o status como E (Estacionado)
 
 
@@ -17,18 +18,19 @@ informou a placa
 
 -------------Saida de Veículo------------- Update
 
-Informa a placa
+Informa a placa(placaRetornaDados)
 	Traz pro front
 		Modelo
 		Cor
 		Cliente
-	Botão encerrar
+	Botão encerrar(ReservaController com o id do veiculo);
 		Altera o status para A (Aguardando Pagamento)
 
 
 -------------Resumo Pagamento-------------
 
-Passa a placa pro banco
+Passa a placa pro banco (PlacaRetornaVeiculoClienteReserva/{PLACA} ; Retorna tudo relacionado a placa pegar a data saída com base na hr atual)
+(Por enqt TarifaPeloBloco/{Bloco} com o valor do bloco retornado pelo json anterior e fazer o calculo com o preço_hora com o valor de data_entrada e data_saida(hora atual))
 No banco traz pro front:
 	Modelo
 	Cor
@@ -39,7 +41,7 @@ No banco traz pro front:
 	Data Saida
 	Valor Total
 	
-	Se apertar no botão Finalizar 
+	Se apertar no botão Finalizar (Usar a api reserva com put para trocar de atv para ntv e colocar o campo data_hora)
 		Muda o status para F (Finalizado)
 	Se apertar no botão Cancelar
 		Muda o status para E (Estacionado) e remove o campo data_saida 
