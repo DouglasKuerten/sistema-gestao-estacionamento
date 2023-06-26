@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useStatem, useEffect } from 'react';
+import axios from 'axios';
+import.meta.env
 
 const VeiculosEstacionados = [
     {
@@ -49,6 +51,17 @@ const VeiculosEstacionados = [
 ];
 
 export default function ViewParkedVehicles() {
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_DB_URL + 'veiculosEstacionados')
+            .then(response => {
+                const data = response.data;
+                console.log(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    })
+
     function calcularTempoDecorrido(dataEntrada) {
         var dataAtual = new Date();
         var diferenca = dataAtual - new Date(dataEntrada);
@@ -64,42 +77,42 @@ export default function ViewParkedVehicles() {
             <div className="pb-8">
                 <h1 className="text-2xl font-semibold">Veículos Estacionados</h1>
             </div>
-            <div class="w-full mb-4 px-4 mx-auto mt-2 ">
-                <div class="flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                    <div class="rounded-t mb-0 px-4 py-3 border-0">
-                        <div class="flex flex-wrap items-center">
-                            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                                <h3 class="font-semibold text-base text-blueGray-700">Titulo da listagem</h3>
+            <div className="w-full mb-4 px-4 mx-auto mt-2 ">
+                <div className="flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+                    <div className="rounded-t mb-0 px-4 py-3 border-0">
+                        <div className="flex flex-wrap items-center">
+                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                <h3 className="font-semibold text-base text-blueGray-700">Titulo da listagem</h3>
                             </div>
-                            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                <button class="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Filtros</button>
+                            <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                                <button className="bg-blue-500 text-white active:bg-blue-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">Filtros</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="block w-full overflow-x-auto">
-                        <table class="items-center bg-transparent w-full border-collapse ">
+                    <div className="block w-full overflow-x-auto">
+                        <table className="items-center bg-transparent w-full border-collapse ">
                             <thead>
                                 <tr>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Placa
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Modelo
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Data Entrada
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Tempo Decorrido
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Valor Atual
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Cliente
                                     </th>
-                                    <th class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Vaga
                                     </th>
 
@@ -109,26 +122,26 @@ export default function ViewParkedVehicles() {
                             <tbody>
                                 {VeiculosEstacionados.map((veiculo, index) => (
                                     <tr key={index}>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                                             {veiculo.placa}
                                         </td>
-                                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                                             {veiculo.modelo}
                                         </td>
-                                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             {veiculo.dataEntrada}
                                         </td>
-                                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             {calcularTempoDecorrido(veiculo.dataEntrada)}
                                         </td>
-                                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            <i class="fas fa-arrow-up text-emerald-500 mr-1">R$</i>
+                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                            <i className="fas fa-arrow-up text-emerald-500 mr-1">R$</i>
                                             {calcularPreco(veiculo.dataEntrada)}
                                         </td>
-                                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             {veiculo.cliente}
                                         </td>
-                                        <td class="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             {veiculo.vaga}
                                         </td>
                                     </tr>
@@ -140,9 +153,9 @@ export default function ViewParkedVehicles() {
                     </div>
                 </div>
             </div>
-            <footer class="flex flex-wrap items-center justify-center">
-                <div class="w-full px-1 mx-auto text-center">
-                    <div class="text-sm text-blueGray-500 font-semibold py-1">
+            <footer className="flex flex-wrap items-center justify-center">
+                <div className="w-full px-1 mx-auto text-center">
+                    <div className="text-sm text-blueGray-500 font-semibold py-1">
                         <a>Rodapé / Navegação páginas</a>
                     </div>
                 </div>
