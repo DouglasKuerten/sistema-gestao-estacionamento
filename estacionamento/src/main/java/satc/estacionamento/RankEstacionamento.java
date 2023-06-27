@@ -26,7 +26,7 @@ public class RankEstacionamento {
             @PathVariable("startDate") String startDate,
             @PathVariable("endDate") String endDate
     ) {
-        String sql = "CALL get_parking_ranking(?, ?)";
+        String sql = "relatorio_front(?, ?)";
         return jdbcTemplate.queryForList(sql, startDate, endDate);
     }
 }
