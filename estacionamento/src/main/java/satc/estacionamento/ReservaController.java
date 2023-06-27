@@ -40,16 +40,49 @@ public class ReservaController {
 
     @RequestMapping(value = "/reserva", method = RequestMethod.POST)
     public List<Map<String, Object>> createReserva(@RequestBody Map<String, Object> requestBody) {
-        int idBloco = (int) requestBody.get("ID_BLOCO");
-        LocalDate dtInicio = LocalDate.parse((String) requestBody.get("DT_INICIO"));
-        LocalDate dtFim = LocalDate.parse((String) requestBody.get("DT_FIM"));
-        String status = (String) requestBody.get("STATUS");
-        int idVeiculo = (int) requestBody.get("ID_VEICULO");
+        Integer idBloco;
+        if (requestBody.get("ID_BLOCO") != null) {
+            idBloco = (int) requestBody.get("ID_BLOCO");
+        } else {
+            idBloco = null;
+        }
+        String dtInicio;
+        if (requestBody.get("DT_INICIO") != null) {
+            dtInicio = (String) requestBody.get("DT_INICIO");
+        } else {
+            dtInicio = null;
+        }
+        String dtFim;
+        if (requestBody.get("DT_FIM") != null) {
+            dtFim = (String) requestBody.get("DT_FIM");
+        } else {
+            dtFim = null;
+        }
+        String status;
+        if (requestBody.get("STATUS") != null) {
+            status = (String) requestBody.get("STATUS");
+            status = "'" + status +"'";
+        } else {
+            status = (String) requestBody.get("STATUS");
+        }
+        Integer idVeiculo;
+        if (requestBody.get("ID_VEICULO") != null) {
+            idVeiculo = (int) requestBody.get("ID_VEICULO");
+        } else {
+            idVeiculo = (int) requestBody.get("ID_VEICULO");
+        }
+        
+        if (dtInicio != null) {
+            dtInicio = "TO_DATE('" + dtInicio + "', 'YYYY-MM-DD HH24:MI')";
+        }
+        if (dtFim != null) {
+            dtFim = "TO_DATE('" + dtFim + "', 'YYYY-MM-DD HH24:MI')";
+        }
 
         String sql = "INSERT INTO RESERVA (ID_BLOCO, DT_INICIO, DT_FIM, STATUS, ID_VEICULO) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, idBloco, dtInicio, dtFim, status, idVeiculo);
+        jdbcTemplate.execute("INSERT INTO RESERVA (ID_BLOCO, DT_INICIO, DT_FIM, STATUS, ID_VEICULO) VALUES ("+ idBloco+ " , "+ dtInicio+ ", "+ dtFim+ ", "+ status+ ", "+ idVeiculo+ ")");
 
-        String selectSql = "SELECT * FROM RESERVA WHERE ID_RESERVA = ?";
+        String selectSql = "SELECT * FROM RESERVA WHERE ID_VEICULO = ? and STATUS = 'ATV'";
         List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, idVeiculo);
         return insertedData;
     }
