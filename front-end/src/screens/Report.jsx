@@ -23,7 +23,7 @@ export default function Report() {
         },
         {
             titulo: "Ranking de Horas Estacionadas",
-            arquivo: <RankVehiclesParked />
+            arquivo: <RankVehiclesParked filterValues={filtersValues} />
         }]
 
     function validarFiltrosInformados(rep) {
@@ -48,8 +48,8 @@ export default function Report() {
                 Filtros
             </h3>
             <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 mb-5">
-                <Input type="date" name="cliente" id="cliente" autoComplete="off" label="Data Início" placeholder="" required={true} onChange={(value) => setFiltersValues({ ...filtersValues, dataInicio: value.target.value })} />
-                <Input type="date" name="cliente" id="cliente" autoComplete="off" label="Data Fim" placeholder="" required={true} onChange={(value) => setFiltersValues({ ...filtersValues, dataFim: value.target.value })} />
+                <Input type="date" name="cliente" id="cliente" autoComplete="off" label="Data Início" placeholder="" obrigatory={'YES'} onChange={(value) => setFiltersValues({ ...filtersValues, dataInicio: value.target.value })} />
+                <Input type="date" name="cliente" id="cliente" autoComplete="off" label="Data Fim" placeholder="" obrigatory={'YES'} onChange={(value) => setFiltersValues({ ...filtersValues, dataFim: value.target.value })} />
 
             </div>
             <div className=" grid grid-cols-3 gap-x-6 gap-y-8 mb-5">

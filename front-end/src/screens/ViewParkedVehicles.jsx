@@ -1,77 +1,22 @@
-import React, { useStatem, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import.meta.env
-
-const VeiculosEstacionados = [
-    {
-        placa: 'MXT-0123',
-        dataEntrada: '01/01/2020 07:59',
-        modelo: 'Civic',
-        cor: 'Cinza Espacial',
-        tipoVeiculo: 'Carro',
-        cliente: '',
-        vaga: 132,
-    },
-    {
-        placa: 'ABC-4567',
-        dataEntrada: '02/03/2022 12:30',
-        modelo: 'Corolla',
-        cor: 'Branco Pérola',
-        tipoVeiculo: 'Carro',
-        cliente: 'João Silva',
-        vaga: 215,
-    },
-    {
-        placa: 'XYZ-7890',
-        dataEntrada: '12/06/2023 09:45',
-        modelo: 'Golf',
-        cor: 'Preto',
-        tipoVeiculo: 'Carro',
-        cliente: 'Maria Santos',
-        vaga: 304,
-    },
-    {
-        placa: 'QWE-1234',
-        dataEntrada: '10/09/2021 18:20',
-        modelo: 'HB20',
-        cor: 'Prata',
-        tipoVeiculo: 'Carro',
-        cliente: 'Pedro Oliveira',
-        vaga: 421,
-    },
-    {
-        placa: 'JKL-5678',
-        dataEntrada: '07/04/2023 15:10',
-        modelo: 'Fiesta',
-        cor: 'Vermelho',
-        tipoVeiculo: 'Carro',
-        cliente: 'Ana Souza',
-        vaga: 523,
-    },
-];
+import moment from "moment";
+import 'moment/locale/pt-br'
+moment.locale('pt-br')
 
 export default function ViewParkedVehicles() {
+    const [databaseValues, setDatabaseValues] = useState([]);
     useEffect(() => {
         axios.get(import.meta.env.VITE_DB_URL + 'veiculosEstacionados')
             .then(response => {
                 const data = response.data;
-                console.log(data);
+                setDatabaseValues(data);
             })
             .catch(error => {
                 console.error(error);
             });
-    })
+    }, []);
 
-    function calcularTempoDecorrido(dataEntrada) {
-        var dataAtual = new Date();
-        var diferenca = dataAtual - new Date(dataEntrada);
-        return '1 Dia, 3 horas';
-    }
-
-    const calcularPreco = (dataEntrada) => {
-        let preco = 100;
-        return preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });;
-    };
     return (
         <div className="duration-300">
             <div className="pb-8">
@@ -104,45 +49,32 @@ export default function ViewParkedVehicles() {
                                         Data Entrada
                                     </th>
                                     <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        Tempo Decorrido
-                                    </th>
-                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        Valor Atual
-                                    </th>
-                                    <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         Cliente
                                     </th>
                                     <th className="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        Vaga
+                                        Bloco
                                     </th>
 
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {VeiculosEstacionados.map((veiculo, index) => (
+                                {databaseValues.map((veiculo, index) => (
                                     <tr key={index}>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                            {veiculo.placa}
+                                            {veiculo.DS_PLACA}
                                         </td>
                                         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                            {veiculo.modelo}
+                                            {veiculo.DS_MODELO}
                                         </td>
                                         <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {veiculo.dataEntrada}
+                                            {moment(veiculo.DT_INICIO).format('DD/MM/YYYY HH:MM')}
                                         </td>
                                         <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {calcularTempoDecorrido(veiculo.dataEntrada)}
+                                            {veiculo.ID_CLIENTE}
                                         </td>
                                         <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            <i className="fas fa-arrow-up text-emerald-500 mr-1">R$</i>
-                                            {calcularPreco(veiculo.dataEntrada)}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {veiculo.cliente}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {veiculo.vaga}
+                                            {veiculo.ID_BLOCO}
                                         </td>
                                     </tr>
                                 )

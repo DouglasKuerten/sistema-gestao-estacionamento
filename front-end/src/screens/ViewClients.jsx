@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsTrashFill } from "react-icons/bs"
-
+import axios from 'axios';
 
 const ClientesCadastrados = [
     {
@@ -68,6 +68,20 @@ const ClientesCadastrados = [
 ];
 
 export default function ViewClients() {
+    const [databaseValues, setDatabaseValues] = useState([]);
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_DB_URL + 'cliente')
+            .then(response => {
+                const data = response.data;
+                setDatabaseValues(data);
+                console.log(data)
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+
     function calcularTempoDecorrido(dataEntrada) {
         var dataAtual = new Date();
         var diferenca = dataAtual - new Date(dataEntrada);
@@ -79,13 +93,15 @@ export default function ViewClients() {
         return preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     };
 
-    const [showPlacas, setShowPlacas] = useState(false);
-    const handleMouseEnter = () => {
-        setShowPlacas(true);
-    };
-    const handleMouseLeave = () => {
-        setShowPlacas(false);
-    };
+    function deleteClient(idCliente) {
+        axios.delete(import.meta.env.VITE_DB_URL + 'cliente/' + idCliente)
+            .then(response => {
+                console.log("Sucesso ao deletar")
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
     return (
         <div className="duration-300">
@@ -134,34 +150,33 @@ export default function ViewClients() {
                             </thead>
 
                             <tbody>
-                                {ClientesCadastrados.map((cliente, index) => (
+                                {databaseValues.map((cliente, index) => (
                                     <tr key={index}>
                                         <td className="border-t-0 pl-6 pr-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap py-4 text-left">
-                                            {cliente.id}
+                                            {cliente.ID_CLIENTE}
                                         </td>
                                         <td className="border-t-0 px-2 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                            {cliente.nome}
+                                            {cliente.DS_NOME}
                                         </td>
                                         <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {cliente.telefone}
+                                            {cliente.DS_TELEFONE}
                                         </td>
                                         <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {cliente.email}
+                                            {cliente.DS_EMAIL}
                                         </td>
                                         <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {cliente.endereco}
+                                            {cliente.ENDERECO}
                                         </td>
-                                        <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs p-4 whitespace-nowrap">
+                                        {/*                                         <td className="border-t-0 px-2 align-center border-l-0 border-r-0 text-xs p-4 whitespace-nowrap">
                                             <span className={`flex group relative cursor-pointer flex-col lg:w-52 `}>
                                                 <span className='overflow-hidden whitespace-nowrap text-ellipsis'>
                                                     {cliente.veiculos.join(', ')}
                                                 </span>
                                                 <span className="flex absolute top-5 whitespace-pre-wrap max-w-full z-10 scale-0 rounded bg-gray-200 p-1.5 text-xs text-gray-700 group-hover:scale-100">{cliente.veiculos.join(', ')}</span>
                                             </span >
-                                        </td>
+                                        </td> */}
                                         <td className="right-14 bg-white tborder-t-0 px-2 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-1.5 max-w-xl">
-                                            <button className="bg-red-500 text-white active:bg-red-600 text-base uppercase p-1.5 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button"><BsTrashFill></BsTrashFill></button>
-
+                                            <button onClick={() => deleteClient(cliente.ID_CLIENTE)} className="bg-red-500 text-white active:bg-red-600 text-base uppercase p-1.5 rounded outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="button"><BsTrashFill></BsTrashFill></button>
                                         </td>
                                     </tr>
                                 ))}

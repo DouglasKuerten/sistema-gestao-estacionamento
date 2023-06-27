@@ -35,7 +35,7 @@ public class ClienteController {
     @RequestMapping(value = "/cliente/{idCliente}", method = RequestMethod.GET)
     public List<Map<String, Object>> GetById(@PathVariable(value = "idCliente") String id) throws Exception{
         String sql = "SELECT * FROM cliente where ID_CLIENTE = ?";
-        return jdbcTemplate.queryForList(sql);
+        return jdbcTemplate.queryForList(sql, id);
     }
 
     @RequestMapping(value = "/cliente", method =  RequestMethod.POST)
@@ -68,8 +68,8 @@ public class ClienteController {
     }
 
     @RequestMapping(value = "/cliente/{idCliente}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("idCliente") int idCliente) throws Exception {
+    public boolean delete(@PathVariable("idCliente") int idCliente) throws Exception {
         String sql = "DELETE FROM cliente WHERE ID_CLIENTE = ?";
-        jdbcTemplate.update(sql, idCliente);
+        return jdbcTemplate.update(sql, idCliente) == 1;
     }
 }

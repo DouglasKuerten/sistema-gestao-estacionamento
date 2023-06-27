@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Page, Text, View, Document, Svg, Path } from '@react-pdf/renderer';
 import { BsPinFill } from "react-icons/bs"
+import axios from 'axios';
+import moment from "moment";
+import 'moment/locale/pt-br'
+moment.locale('pt-br')
 
-export default function RankVehiclesParked() {
+export default function RankVehiclesParked({ filterValues }) {
+    console.log(filterValues)
+    const [databaseValues, setDatabaseValues] = useState([]);
+    useEffect(() => {
+        axios.get(import.meta.env.VITE_DB_URL + 'veiculosEstacionadosss')
+            .then(response => {
+                const data = response.data;
+                //setDatabaseValues(data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
+
+
     const dados = [
         {
             "placa": "ABC1234",
@@ -55,7 +73,7 @@ export default function RankVehiclesParked() {
                     </View>
                     <View style={{ width: '50%', alignItems: 'center', flexDirection: 'colunm', justifyContent: 'center' }}>
                         <Text style={{ fontSize: 16, fontFamily: "Helvetica-Bold", textAlign: "center" }}>Ranking de Horas Estacionadas</Text>
-                        <Text style={{ fontSize: 9, fontFamily: "Helvetica", textAlign: "center" }}>Período de dd/mm/yyyy até dd/mm/yyyy</Text>
+                        <Text style={{ fontSize: 9, fontFamily: "Helvetica", textAlign: "center" }}>{`Período de ${moment(filterValues.dataInicio).format("DD/MM/YYYY")} até ${moment(filterValues.dataFim).format("DD/MM/YYYY")}`}</Text>
                     </View>
                     <View style={{ width: '25%', alignItems: 'center', flexDirection: 'row', justifyContent: 'flex-end', fontSize: 7 }}>
                         <View style={{ fontFamily: "Helvetica-Bold", textAlign: 'right', alignItems: 'flex-end' }}>
@@ -82,21 +100,21 @@ export default function RankVehiclesParked() {
                 </View>
 
                 {/* Dados */}
-                {dados.map((dado, index) => (
+                {databaseValues.map((dado, index) => (
                     <View wrap={false} key={index} style={{ flexDirection: "row", marginBottom: 2, fontSize: 8, fontFamily: "Helvetica" }}>
-                        <Text style={{ width: "5%", maxLines: 1 }}>{index + 1}</Text>
-                        <Text style={{ width: "8%", maxLines: 1 }}>{dado.placa}</Text>
-                        <Text style={{ width: "20%", maxLines: 1 }}>{dado.modelo}</Text>
-                        <Text style={{ width: "35%", maxLines: 1 }}>{dado.cliente}</Text>
-                        <Text style={{ width: "20%", maxLines: 1 }}>{dado.tempoDecorridoTotal}</Text>
-                        <Text style={{ width: "12%", maxLines: 1, textAlign: "right" }}>{dado.valorTotal.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
+                        <Text style={{ width: "5%", maxLines: 1 }}>{dado.RANK}</Text>
+                        <Text style={{ width: "8%", maxLines: 1 }}>{dado.DS_PLACA}</Text>
+                        <Text style={{ width: "20%", maxLines: 1 }}>{dado.DS_MODELO}</Text>
+                        <Text style={{ width: "35%", maxLines: 1 }}>{dado.DS_NOME}</Text>
+                        <Text style={{ width: "20%", maxLines: 1 }}>{dado.TEMPO_DECORRIDO_TOTAL}</Text>
+                        <Text style={{ width: "12%", maxLines: 1, textAlign: "right" }}>{dado.VALOR_TOTAL.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
                     </View>
                 ))}
 
                 {/* Totalizador */}
                 <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 1, fontFamily: "Helvetica-Bold", fontSize: 8, textAlign: "right" }}>
                     <Text style={{ width: "90%" }}>Total R$:</Text>
-                    <Text style={{ width: "10%" }}>{calcularTotal(dados)}</Text>
+                    <Text style={{ width: "10%" }}>{calcularTotal(databaseValues)}</Text>
                 </View>
             </Page>
         </Document>

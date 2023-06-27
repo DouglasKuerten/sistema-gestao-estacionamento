@@ -31,7 +31,7 @@ export default function RegisterClient() {
                 <div className="space-y-12">
                     <div className="border-b border-gray-900/10 pb-12">
                         <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <Input type="text" name="nomeCompleto" id="nomeCompleto" autoComplete="off" label="Nome Completo" placeholder="" required={true} />
+                            <Input type="text" name="nomeCompleto" id="nomeCompleto" autoComplete="off" label="Nome Completo" placeholder="" obrigatory={'YES'} />
                             <Input type="text" name="telefone" id="telefone" autoComplete="off" label="Telefone" placeholder="" />
                             <Input type="text" name="email" id="email" autoComplete="off" label="E-mail" placeholder="" />
                             <Input type="text" name="endereco" id="endereco" autoComplete="off" label="Endereço" placeholder="" />

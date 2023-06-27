@@ -24,7 +24,7 @@ public class VeiculosEstacionado {
     public List<Map<String, Object>> getPlacaRetornaVeiculoClienteReserva() {
         String sql = "SELECT *\n" +
 "                 FROM  VEICULO v\n" +
-"                 JOIN CLIENTE c ON v.ID_CLIENTE = c.ID_CLIENTE \n" +
+"                 LEFT JOIN CLIENTE c ON v.ID_CLIENTE = c.ID_CLIENTE \n" +
 "                 JOIN RESERVA r ON v.ID_VEICULO = r.ID_VEICULO \n" +
 "                 AND r.STATUS = 'ATV'";
         return jdbcTemplate.queryForList(sql);

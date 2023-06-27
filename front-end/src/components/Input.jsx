@@ -3,7 +3,7 @@ export default function Input(props) {
     return (
         <div className="sm:col-span-4">
             <label className="block text-sm font-medium leading-6 text-gray-900">
-                {props.label} {props.required && <a className={'text-red-600'}>*</a>}
+                {props.label} {props.obrigatory == 'YES' && <a className={'text-red-600'}>*</a>}
             </label>
 
             <div className="mt-2">
