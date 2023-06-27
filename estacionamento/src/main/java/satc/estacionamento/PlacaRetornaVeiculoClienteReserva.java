@@ -27,7 +27,7 @@ public class PlacaRetornaVeiculoClienteReserva {
 
     @GetMapping
     public List<Map<String, Object>> getPlacaRetornaVeiculoClienteReserva(@PathVariable("placa") String placa) {
-        String sql = "SELECT c.*, r.* " +
+        String sql = "SELECT c.*, r.*, v.* " +
                  "FROM CLIENTE c " +
                  "JOIN VEICULO v ON c.ID_CLIENTE = v.ID_CLIENTE " +
                  "JOIN RESERVA r ON v.ID_VEICULO = r.ID_VEICULO " +
