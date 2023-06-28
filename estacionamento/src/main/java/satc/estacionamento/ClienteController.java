@@ -41,14 +41,9 @@ public class ClienteController {
     @RequestMapping(value = "/cliente", method =  RequestMethod.POST)
     public List<Map<String, Object>> Post(@RequestBody Map<String, Object> requestBody) throws Exception{
         String dsNome = (String) requestBody.get("DS_NOME");
-        String dsTelefone = (String) requestBody.get("DS_TELEFONE");
-        String dsEmail = (String) requestBody.get("DS_EMAIL");
-        String endereco = (String) requestBody.get("ENDERECO");
-        LocalDate dtCadastro = LocalDate.now();
-        String sql = "INSERT INTO cliente (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, dsNome, dsTelefone, dsEmail, dtCadastro, endereco);
-        String selectSql = "SELECT * FROM estacionamento WHERE DS_NOME = ? AND dsTelefone = ?";
-        List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, dsNome, dsTelefone);
+        jdbcTemplate.execute("INSERT INTO cliente (DS_NOME) VALUES ('"+ dsNome +"')");
+        String selectSql = "SELECT * FROM cliente WHERE DS_NOME = ?";
+        List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, dsNome);
         return insertedData;
     }
 
@@ -68,8 +63,8 @@ public class ClienteController {
     }
 
     @RequestMapping(value = "/cliente/{idCliente}", method = RequestMethod.DELETE)
-    public boolean delete(@PathVariable("idCliente") int idCliente) throws Exception {
+    public List<Map<String, Object>> delete(@PathVariable("idCliente") int idCliente) throws Exception {
         String sql = "DELETE FROM cliente WHERE ID_CLIENTE = ?";
-        return jdbcTemplate.update(sql, idCliente) == 1;
+        return jdbcTemplate.queryForList(sql, idCliente);
     }
 }

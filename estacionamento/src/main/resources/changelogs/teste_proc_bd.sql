@@ -17,65 +17,31 @@ create or replace function f_calcula_valor_estacionado(p_bloco number, p_horas n
     return v_preco_total;
 end;
 
-CREATE OR REPLACE PROCEDURE relatorio_front (vData_ini DATE, vData_fim DATE)
-AS
-  -- Declare variables to hold the result values
-  vTempo_total NUMBER;
-  vDS_NOME VARCHAR2(100);
-  vDS_MODELO VARCHAR2(100);
-  vDS_PLACA VARCHAR2(100);
-  vVALOR NUMBER;
-  vRANK NUMBER;
-  
-  -- Declare a cursor to retrieve the result set
-  CURSOR c_reserva IS
-    SELECT
-      (TO_DATE(A.DT_FIM, 'dd/mm/yyyy hh24:mi') - TO_DATE(A.DT_INICIO, 'dd/mm/yyyy hh24:mi')) * 24  AS TEMPO_DECORRIDO_TOTAL,
-      D.DS_NOME,
-      DS_MODELO,
-      B.DS_PLACA,
-      f_calcula_valor_estacionado(a.id_bloco, (TO_DATE(A.DT_FIM, 'dd/mm/yyyy hh24:mi') - TO_DATE(A.DT_INICIO, 'dd/mm/yyyy hh24:mi')) * 24 ) AS VALOR,
-      RANK() OVER (ORDER BY (A.DT_FIM - A.DT_INICIO) DESC) AS RANK
-    FROM
-      RESERVA A
-      INNER JOIN VEICULO B ON B.ID_VEICULO = A.ID_VEICULO
-      INNER JOIN PAGAMENTO C ON C.ID_RESERVA = A.ID_RESERVA
-      LEFT JOIN CLIENTE D ON D.ID_CLIENTE = B.ID_CLIENTE
-      JOIN TARIFA T ON A.ID_BLOCO = T.ID_BLOCO
-    WHERE
-      A.DT_INICIO BETWEEN TO_DATE(vData_ini, 'DD-MM-YYYY') AND TO_DATE(vData_fim, 'DD-MM-YYYY');
-BEGIN
-  -- Open the cursor
-  OPEN c_reserva;
+create or replace TYPE type_relatorio_front as object (
+tempo_decorrido_total      number(5),
+ds_nome                    varchar2(50),
+ds_modelo                  varchar2(50),
+ds_placa                   varchar2(7),
+valor                      number(5),
+rank                       number(3));
 
-  -- Fetch the result into variables
-  FETCH c_reserva INTO vTempo_total, vDS_NOME, vDS_MODELO, vDS_PLACA, vVALOR, vRANK;
+create or replace function f_relatorio_front (vdata_ini date, vdata_fim date) return ctype_relatorio_front as
+begin
 
-  -- Perform further operations or return the values as needed
-  
-  -- Close the cursor
-  CLOSE c_reserva;
-END relatorio_front;
-  
-  BEGIN
-  relatorio_front(TO_DATE('2023-06-01', 'YYYY-MM-DD'), TO_DATE('2023-06-30', 'YYYY-MM-DD'));
-END;
+    select type_relatorio_front((to_date(a.dt_fim, 'dd/mm/yyyy hh24:mi') - to_date(a.dt_inicio, 'dd/mm/yyyy hh24:mi')) * 24 as tempo_decorrido_total,
+                                d.ds_nome,
+                                ds_modelo,
+                                b.ds_placa,
+                                f_calcula_valor_estacionado(a.id_bloco, (to_date(a.dt_fim, 'dd/mm/yyyy hh24:mi') - to_date(a.dt_inicio, 'dd/mm/yyyy hh24:mi')) * 24 ) as valor,
+                                rank() over (order by (a.dt_fim - a.dt_inicio) desc) as rank)
+              bulk collect into ct_relatorio_front             
+                           from reserva a
+                                inner join veiculo b on b.id_veiculo = a.id_veiculo
+                                inner join pagamento c on c.id_reserva = a.id_reserva
+                                left join cliente d on d.id_cliente = b.id_cliente
+                                join tarifa t on a.id_bloco = t.id_bloco
+                          where a.dt_inicio between to_date(vdata_ini, 'DD-MM-YYYY') and to_date(vdata_fim, 'DD-MM-YYYY')
+    
+    return ct_relatorio_front;
 
-
--- 
--- 
--- SELECT * FROM CLIENTE
--- SELECT * FROM VEICULO
--- SELECT * FROM RESERVA
--- SELECT * FROM PAGAMENTO
--- 
--- 
--- SELECT A.ID_RESERVA, A.DT_INICIO, A.DT_FIM, D.DS_NOME, DS_MODELO, B.DS_PLACA, C.VALOR FROM RESERVA A
--- INNER JOIN VEICULO B ON B.ID_VEICULO = A.ID_VEICULO
--- INNER JOIN PAGAMENTO C ON C.ID_RESERVA = A.ID_RESERVA
--- LEFT JOIN CLIENTE D ON D.ID_CLIENTE = B.ID_CLIENTE
--- WHERE A.DT_INICIO BETWEEN '01/01/2023' AND '25/03/2023'
--- 
--- 
--- SELECT ID_RESERVA, DT_INICIO , DT_FIM FROM RESERVA
--- WHERE ID_RESERVA = 1
+end;

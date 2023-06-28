@@ -43,13 +43,14 @@ public class VeiculoController {
         String dsPlaca = (String) requestBody.get("DS_PLACA");
         String dsModelo = (String) requestBody.get("DS_MODELO");
         String dsCor = (String) requestBody.get("DS_COR");
-        LocalDate dtCadastro = LocalDate.now();
+        String dtCadastro = (String) requestBody.get("DT_CADASTRO");
+        dtCadastro = "TO_DATE('" + dtCadastro + "', 'YYYY-MM-DD HH24:MI')";
         int idCliente = (int) requestBody.get("ID_CLIENTE");
 
         String sql = "INSERT INTO VEICULO (DS_PLACA, DS_MODELO, DS_COR, DT_CADASTRO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(sql, dsPlaca, dsModelo, dsCor, dtCadastro, idCliente);
+        jdbcTemplate.execute("INSERT INTO VEICULO (DS_PLACA, DS_MODELO, DS_COR, DT_CADASTRO, ID_CLIENTE) VALUES ('" + dsPlaca + "', '" + dsModelo + "', '" + dsCor + "', " + dtCadastro + ", " + idCliente + ")");
 
-        String selectSql = "SELECT * FROM VEICULO WHERE ID_VEICULO = ?";
+        String selectSql = "SELECT * FROM VEICULO WHERE ID_CLIENTE = ?";
         List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, idCliente);
         return insertedData;
     }
