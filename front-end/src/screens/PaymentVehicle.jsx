@@ -2,9 +2,9 @@ import Input from "../components/Input"
 import Button from "../components/Button"
 import ButtonTransparent from "../components/ButtonTransparent"
 
-export default function PaymentVehicle() {
+export default function PaymentVehicle({ values }) {
     return (
-        <div className="duration-300">
+        <div className="flex duration-300 flex-col">
             <div className="pb-8">
                 <h1 className="text-2xl font-semibold">Resumo do Período Estacionado</h1>
             </div>
@@ -41,10 +41,10 @@ export default function PaymentVehicle() {
                     </div>
                 </div>
 
-                <div className="mt-6 flex items-center justify-end gap-x-6">
+                {/*                 <div className="mt-6 flex items-center justify-end gap-x-6">
                     <ButtonTransparent type="button">Cancelar</ButtonTransparent>
                     <Button type="submit" >Finalizar</Button>
-                </div>
+                </div> */}
             </form>
         </div>
     )

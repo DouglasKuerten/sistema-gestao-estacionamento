@@ -11,6 +11,7 @@ export default function ViewParkedVehicles() {
             .then(response => {
                 const data = response.data;
                 setDatabaseValues(data);
+                console.log(data)
             })
             .catch(error => {
                 console.error(error);
@@ -71,7 +72,7 @@ export default function ViewParkedVehicles() {
                                             {moment(veiculo.DT_INICIO).format('DD/MM/YYYY HH:MM')}
                                         </td>
                                         <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                            {veiculo.ID_CLIENTE}
+                                            {veiculo.DS_NOME}
                                         </td>
                                         <td className="border-t-0 px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                             {veiculo.ID_BLOCO}

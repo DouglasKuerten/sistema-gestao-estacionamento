@@ -95,8 +95,9 @@ public class ReservaController {
         String status = (String) requestBody.get("STATUS");
         int idVeiculo = (int) requestBody.get("ID_VEICULO");
 
-        String sql = "UPDATE RESERVA SET ID_BLOCO = ?, DT_INICIO = ?, DT_FIM = ?, STATUS = ?, ID_VEICULO = ? WHERE ID_RESERVA = ?";
-        jdbcTemplate.update(sql, idBloco, dtInicio, dtFim, status, idVeiculo, idReserva);
+        String sql = "UPDATE RESERVA SET ID_BLOCO = " + idBloco + ", DT_INICIO = TO_DATE("+  dtInicio + " ,'YYYY-MM-DD HH24:MI:SS'), DT_FIM = TO_DATE("+ dtFim +",'YYYY-MM-DD HH24:MI:SS'), STATUS = "+ status +", ID_VEICULO = "+idVeiculo+" WHERE ID_RESERVA = " + idReserva;
+        System.out.println(sql);
+        jdbcTemplate.execute(sql);
 
         String selectSql = "SELECT * FROM RESERVA WHERE ID_RESERVA = ?";
         List<Map<String, Object>> updatedData = jdbcTemplate.queryForList(selectSql, idReserva);
