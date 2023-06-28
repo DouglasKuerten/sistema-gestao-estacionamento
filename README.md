@@ -56,9 +56,24 @@
 
 Solução em SQL:
 <code>
-SELECT vagas_disponiveis
-FROM estacionamento
-WHERE estacionamento_id = <id_do_estacionamento>;
+SELECT
+    ESTACIONAMENTO.DS_SIGLA AS "ESTACIONAMENTO",
+    CONCAT(
+        CONCAT(BLOCO.ID_BLOCO,BLOCO.DS_SIGLA),
+        CONCAT(' - ', BLOCO.DESCRICAO)
+    ) AS "DESCRIÇÃO DO BLOCO",
+    BLOCO.VAGAS_TOTAIS - (
+    SELECT COUNT(1)
+      FROM RESERVA
+     WHERE BLOCO.ID_BLOCO = RESERVA.ID_BLOCO
+       AND STATUS = 'ATV'
+    ) AS "VAGAS DISPONIVEIS",
+    BLOCO.VAGAS_TOTAIS AS "VAGAS TOTAIS"
+  FROM BLOCO INNER JOIN ESTACIONAMENTO
+    ON (BLOCO.ID_ESTACIONAMENTO = ESTACIONAMENTO.ID_ESTACIONAMENTO)
+ ORDER BY
+    ESTACIONAMENTO.ID_ESTACIONAMENTO,
+    BLOCO.ID_BLOCO;
 </code>
 
 * Pergunta: Quais são os funcionários que ocupam o cargo de "Gerente"?
@@ -74,19 +89,27 @@ WHERE cargo = 'Gerente';
 
 Solução em SQL:
 <code>
-SELECT v.modelo, v.placa
-FROM veiculo v
-INNER JOIN cliente c ON v.cliente_id = c.cliente_id
-WHERE c.cliente_id = <id_do_cliente>
+SELECT 
+    RETORNA_CLIENTE(ID_CLIENTE) AS "CÓDIGO E NOME DO CLIENTE",
+    DS_MODELO AS "MODELO",
+    DS_PLACA AS "PLACA"
+  FROM VEICULO
+ WHERE ID_CLIENTE IS NOT NULL
+ ORDER BY ID_CLIENTE;
 </code>
 
 * Pergunta: Quais são os clientes que possuem reservas ativas no momento?
 
 Solução em SQL:
 <code>
-SELECT c.nome
-FROM cliente c
-INNER JOIN reserva r ON c.cliente_id = r.cliente_id
-WHERE r.data_hora_inicio <= CURRENT_TIMESTAMP
-AND r.data_hora_fim >= CURRENT_TIMESTAMP;
+SELECT
+    RETORNA_CLIENTE(ID_CLIENTE) AS "SOCIO",
+    TIPO_SOCIO.DS_NOME AS "TIPO DE SOCIO",
+    SOCIO.DT_INICIO AS "INICIO DA ASSOCIAÇÃO",
+    SOCIO.DT_FIM AS "FIM DA ASSOCIAÇÃO"
+  FROM SOCIO
+ INNER JOIN TIPO_SOCIO
+    ON (SOCIO.ID_TIPOS = TIPO_SOCIO.ID_TIPOS)
+ WHERE SOCIO.DT_FIM >= SYSDATE
+ ORDER BY DT_INICIO;
 </code>
