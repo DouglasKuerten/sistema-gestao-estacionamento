@@ -9,7 +9,13 @@ informou a placa
 			relaciona o id cliente do veiculo com a tabela de cliente e pega o nome dele
 			(ReservaController com o id do veiculo);
 	se não tem placa no banco
-		no botão salvar(ClienteController, VeiculoController e dps ReservaController)
+		no botão salvar(ClienteController(funciona passando só o campo ds_nome), VeiculoController(funcioana ex: {
+    "DS_PLACA": "testes",
+    "DS_MODELO": "teste Gol",
+    "DS_COR": "teste",
+    "DT_CADASTRO": "2023-06-15 22:52",
+    "ID_CLIENTE": 2
+}) e dps ReservaController)
 			salva as informações colocadas na tela e o status como E (Estacionado)
 
 
