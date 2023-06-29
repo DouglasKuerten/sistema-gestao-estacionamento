@@ -14,7 +14,6 @@
 
    COMMENT ON COLUMN "ESTACIONAMENTO"."ID_ESTACIONAMENTO" IS 'PK Estacionamento';
    COMMENT ON TABLE "ESTACIONAMENTO"  IS 'Cadastro de Estacionamento';
-  ;
 --------------------------------------------------------
 --  Constraints for Table ESTACIONAMENTO
 --------------------------------------------------------
