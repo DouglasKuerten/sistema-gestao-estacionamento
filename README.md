@@ -76,13 +76,14 @@ SELECT
     BLOCO.ID_BLOCO;
 </code>
 
-* Pergunta: Quais são os funcionários que ocupam o cargo de "Gerente"?
+* Pergunta: Quais são o top 5 pagamentos de clientes cadastrados?
 
-Solução em SQL:
-<code>
-SELECT nome
-FROM funcionarios
-WHERE cargo = 'Gerente';
+SELECT D.DS_NOME, A.VALOR FROM pagamento A
+INNER JOIN reserva B ON B.ID_RESERVA = A.ID_RESERVA
+INNER JOIN veiculo C ON C.ID_VEICULO = B.ID_VEICULO
+LEFT JOIN cliente D ON D.ID_CLIENTE = C.ID_CLIENTE
+WHERE ROWNUM <= 5
+ORDER BY VALOR DESC
 </code>
 
 * Pergunta: Quais são os veículos registrados por um determinado cliente?
