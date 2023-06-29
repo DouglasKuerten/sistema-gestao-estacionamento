@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ReservaController {
     private final JdbcTemplate jdbcTemplate;
+    private Object idVeiculo = null;
 
     public ReservaController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -37,6 +38,37 @@ public class ReservaController {
 
     @RequestMapping(value = "/reserva", method = RequestMethod.POST)
     public List<Map<String, Object>> createReserva(@RequestBody Map<String, Object> requestBody) {
+        String modelo;
+        if (requestBody.get("DS_MODELO") != null) {
+            modelo = (String) requestBody.get("DS_MODELO");
+        } else {
+            modelo = null;
+        }
+        String cor;
+        if (requestBody.get("DS_COR") != null) {
+            cor = (String) requestBody.get("DS_COR");
+        } else {
+            cor = null;
+        }
+        if (requestBody.get("ID_VEICULO") != null) {
+            idVeiculo = (Integer) requestBody.get("ID_VEICULO");
+        } 
+        String placa;
+        if (requestBody.get("DS_PLACA") != null) {
+            placa = (String) requestBody.get("DS_PLACA");
+            String sqlVeiculo = "SELECT * FROM VEICULO WHERE DS_PLACA = ?";
+            String retornaIdVeiculo = "SELECT * FROM VEICULO WHERE DS_PLACA = ?";
+            if (jdbcTemplate.queryForList(sqlVeiculo, placa).isEmpty()) {
+                jdbcTemplate.execute("INSERT INTO VEICULO (DS_PLACA, DS_MODELO, DS_COR) VALUES ('" + placa + "', '" + modelo + "', '" + cor + "')");
+                var teste = jdbcTemplate.queryForList(retornaIdVeiculo, placa);
+                teste.forEach(action -> {
+                    idVeiculo = action.get("ID_VEICULO");
+                });
+            }
+        } else {
+            placa = null;
+        }
+        
         Integer idBloco;
         if (requestBody.get("ID_BLOCO") != null) {
             idBloco = (int) requestBody.get("ID_BLOCO");
@@ -62,12 +94,6 @@ public class ReservaController {
         } else {
             status = (String) requestBody.get("STATUS");
         }
-        Integer idVeiculo;
-        if (requestBody.get("ID_VEICULO") != null) {
-            idVeiculo = (int) requestBody.get("ID_VEICULO");
-        } else {
-            idVeiculo = (int) requestBody.get("ID_VEICULO");
-        }
         
         if (dtInicio != null) {
             dtInicio = "TO_DATE('" + dtInicio + "', 'YYYY-MM-DD HH24:MI')";
@@ -79,8 +105,15 @@ public class ReservaController {
         String sql = "INSERT INTO RESERVA (ID_BLOCO, DT_INICIO, DT_FIM, STATUS, ID_VEICULO) VALUES (?, ?, ?, ?, ?)";
         jdbcTemplate.execute("INSERT INTO RESERVA (ID_BLOCO, DT_INICIO, DT_FIM, STATUS, ID_VEICULO) VALUES ("+ idBloco+ " , "+ dtInicio+ ", "+ dtFim+ ", "+ status+ ", "+ idVeiculo+ ")");
 
-        String selectSql = "SELECT * FROM RESERVA WHERE ID_VEICULO = ? and STATUS = 'ATV'";
-        List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, idVeiculo);
+        String selectSql = null;
+        List<Map<String, Object>> insertedData;
+        if (idVeiculo == null) {
+            selectSql = "SELECT * FROM RESERVA WHERE STATUS = 'ATV'";
+            insertedData = jdbcTemplate.queryForList(selectSql);
+        } else {
+            selectSql = "SELECT * FROM RESERVA WHERE ID_VEICULO = ? and STATUS = 'ATV'";
+            insertedData = jdbcTemplate.queryForList(selectSql, idVeiculo);
+        }
         return insertedData;
     }
 
