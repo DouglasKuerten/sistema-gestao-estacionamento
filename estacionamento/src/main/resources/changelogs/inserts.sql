@@ -9,8 +9,8 @@ INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO)VALUE
 INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES ('Fernanda Pereira', '(48) 2222-2222', 'fernanda.pereira@example.com', 'Rua das Dunas, 5678 - Rio Maina, Criciúma', TO_DATE('2023-02-14', 'YYYY-MM-DD'));
 INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO)VALUES ('Gustavo Lima', '(48) 1111-1111', 'gustavo.lima@example.com', 'Travessa das Conchas, 901 - Nova Itália, Urussanga', TO_DATE('2023-03-28', 'YYYY-MM-DD'));
 INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO)VALUES ('Aline Barbosa', '(48) 0000-0000', 'aline.barbosa@example.com', 'Avenida das Palmeiras, 2345 - Presidente Vargas, Criciúma', TO_DATE('2023-04-05', 'YYYY-MM-DD'));
-INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES ('João Pedro Cesconetto', '(48) 123456789', 'joao.silva@example.com', 1, TO_DATE('2023-01-15', 'YYYY-MM-DD'));
-INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES ('Maria Oliveira', '(48) 987654321', 'maria.oliveira@example.com', 2, TO_DATE('2023-02-28', 'YYYY-MM-DD'));
+INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES ('João Pedro Cesconetto', '(48) 123456789', 'joao.silva@example.com', 'Avenida Requinte, 564 - Cidade de Criciúma, Criciúma', TO_DATE('2023-01-15', 'YYYY-MM-DD'));
+INSERT INTO CLIENTE (DS_NOME, DS_TELEFONE, DS_EMAIL, ENDERECO, DT_CADASTRO) VALUES ('Maria Oliveira', '(48) 987654321', 'maria.oliveira@example.com', 'Rua Santos Dumont, 741 - São Defende, Criciúma', TO_DATE('2023-02-28', 'YYYY-MM-DD'));
 
 --INSERT ESTACIONAMENTO
 INSERT INTO ESTACIONAMENTO (DS_NOME, DS_SIGLA, VAGAS_TOTAIS) VALUES ('Estacionamento A', 'EST_A', 150);
