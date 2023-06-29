@@ -42,7 +42,11 @@ export default function EntryVehicle() {
             DT_INICIO: moment(inputValues.dataHoraEntrada).format('YYYY-MM-DD HH:MM'),
             DT_FIM: null,
             STATUS: 'ATV',
-            ID_VEICULO: Number(inputValues.idVeiculo)
+            ID_VEICULO: inputValues.idVeiculo,
+            DS_PLACA: inputValues.placa,
+            DS_MODELO: inputValues.modelo,
+            DS_COR: inputValues.cor,
+            ID_CLIENTE: inputValues.idCliente
         })
             .then(function (response) {
                 setAlertProperties({ visible: true, type: 'sucess', title: 'Sucesso', text: `O veículo de placa ${inputValues.placa} foi cadastrado a entrada com sucesso!` });

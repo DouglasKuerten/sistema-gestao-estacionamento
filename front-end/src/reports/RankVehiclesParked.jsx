@@ -7,52 +7,19 @@ import 'moment/locale/pt-br'
 moment.locale('pt-br')
 
 export default function RankVehiclesParked({ filterValues }) {
-    console.log(filterValues)
     const [databaseValues, setDatabaseValues] = useState([]);
+
     useEffect(() => {
-        axios.get(import.meta.env.VITE_DB_URL + 'veiculosEstacionadosss')
+        axios.get(import.meta.env.VITE_DB_URL + 'rankEstacionamento/' + filterValues.dataInicio + "/" + filterValues.dataFim)
             .then(response => {
                 const data = response.data;
-                //setDatabaseValues(data);
+                setDatabaseValues(data);
+                console.log(response)
             })
             .catch(error => {
                 console.error(error);
             });
     }, []);
-
-
-    const dados = [
-        {
-            "placa": "ABC1234",
-            "modelo": "Ford Focus",
-            "tempoDecorridoTotal": "6 horas",
-            "valorTotal": 70.00,
-            "cliente": "João Silva"
-        },
-        {
-            "placa": "DEF5678",
-            "modelo": "Chevrolet Cruze",
-            "tempoDecorridoTotal": "5 hora",
-            "valorTotal": 55.00,
-            "cliente": "Maria Santos"
-        },
-        {
-            "placa": "GHI9012",
-            "modelo": "Volkswagen Gol",
-            "tempoDecorridoTotal": "3 horas",
-            "valorTotal": 35.00,
-            "cliente": "Pedro Oliveira"
-        }
-    ]
-
-    const calcularTotal = (dados) => {
-        let total = 0;
-        dados.forEach((item) => {
-            total += item.valorTotal;
-        });
-        return total.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    };
-
 
 
     return (
@@ -107,15 +74,9 @@ export default function RankVehiclesParked({ filterValues }) {
                         <Text style={{ width: "20%", maxLines: 1 }}>{dado.DS_MODELO}</Text>
                         <Text style={{ width: "35%", maxLines: 1 }}>{dado.DS_NOME}</Text>
                         <Text style={{ width: "20%", maxLines: 1 }}>{dado.TEMPO_DECORRIDO_TOTAL}</Text>
-                        <Text style={{ width: "12%", maxLines: 1, textAlign: "right" }}>{dado.VALOR_TOTAL.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
+                        <Text style={{ width: "12%", maxLines: 1, textAlign: "right" }}>{dado.VALOR.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text>
                     </View>
                 ))}
-
-                {/* Totalizador */}
-                <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 1, fontFamily: "Helvetica-Bold", fontSize: 8, textAlign: "right" }}>
-                    <Text style={{ width: "90%" }}>Total R$:</Text>
-                    <Text style={{ width: "10%" }}>{calcularTotal(databaseValues)}</Text>
-                </View>
             </Page>
         </Document>
     );

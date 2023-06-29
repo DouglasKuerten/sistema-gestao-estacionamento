@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import Alert from '../components/Alert';
 import { BsTrashFill } from "react-icons/bs"
 import axios from 'axios';
 
 export default function ViewClients() {
+    const [alertProperties, setAlertProperties] = useState({ visible: false, type: '', title: '', text: '' });
+
+    function hiddenAlert() {
+        setTimeout(() => {
+            setAlertProperties({ visible: false, type: '', title: '', text: '' });
+        }, 8000);
+    }
+
     const [databaseValues, setDatabaseValues] = useState([]);
     useEffect(() => {
         axios.get(import.meta.env.VITE_DB_URL + 'cliente')
@@ -31,15 +40,20 @@ export default function ViewClients() {
     function deleteClient(idCliente) {
         axios.delete(import.meta.env.VITE_DB_URL + 'cliente/' + idCliente)
             .then(response => {
+                console.log(response);
                 console.log("Sucesso ao deletar")
             })
             .catch(error => {
                 console.error(error);
+                setAlertProperties({ visible: true, type: 'error', title: 'Erro', text: error.response.data });
+
             });
+        hiddenAlert();
     }
 
     return (
         <div className="duration-300">
+            {alertProperties.visible && <Alert {...alertProperties} />}
             <div className="pb-8">
                 <h1 className="text-2xl font-semibold">Lista de Clientes</h1>
             </div>

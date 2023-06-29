@@ -36,7 +36,7 @@ export default function ExitVehicle() {
             setAlertProperties({ visible: true, type: 'error', title: 'Erro', text: 'A placa deve ser informada para registrar a saída do veículo' });
             hiddenAlert();
             return
-        } else if (inputValues.dataHoraEntrada == null) {
+        } else if (inputValues.dataHoraSaida == null) {
             setAlertProperties({ visible: true, type: 'error', title: 'Erro', text: 'A Data/Hora Saída deve ser informada para registrar a saída do veículo' });
             hiddenAlert();
             return
@@ -73,6 +73,7 @@ export default function ExitVehicle() {
         axios.get(import.meta.env.VITE_DB_URL + 'placaRetornaVeiculoClienteReserva/' + placa)
             .then(response => {
                 const data = response.data;
+                console.log(response)
                 if (data.length > 0) {
                     setInputValues({ ...inputValues, placa: placa, modelo: data[0].DS_MODELO, cor: data[0].DS_COR, cliente: data[0].DS_NOME, idVeiculo: data[0].ID_VEICULO, idCliente: data[0].ID_CLIENTE, idReserva: data[0].ID_RESERVA, dataHoraEntrada: data[0].DT_INICIO, dataHoraSaida: data[0].DT_FIM, bloco: data[0].ID_BLOCO })
                 } else {
@@ -130,7 +131,7 @@ export default function ExitVehicle() {
                 <div className="space-y-12">
                     <div className="pb-12">
                         <div className=" grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                            <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Placa" placeholder="" obrigatory={'YES'} onInput={(value) => searchReserveByPlate(value.target.value)} value={inputValues.placa || ''} />
+                            <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Placa" placeholder="" obrigatory={'YES'} onChange={(value) => searchReserveByPlate(value.target.value)} value={inputValues.placa || ''} />
                             <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Modelo" placeholder="" disabled value={inputValues.modelo || ''} />
                             <Input type="text" name="cliente" id="cliente" autoComplete="off" label="Cor" placeholder="" disabled value={inputValues.cor || ''} />
                             <Input type="datetime-local" name="cliente" id="cliente" autoComplete="off" label="Data/Hora Saída" placeholder="" obrigatory={'YES'} onChange={(value) => onChangeEndDate(value.target.value, inputValues.idReserva, inputValues.bloco)} value={inputValues.dataHoraSaida || ''} />

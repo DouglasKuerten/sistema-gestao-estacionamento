@@ -41,7 +41,7 @@ public class RankEstacionamento {
                     + " LEFT JOIN CLIENTE D ON D.ID_CLIENTE = B.ID_CLIENTE"
                     + " JOIN TARIFA T ON A.ID_BLOCO = T.ID_BLOCO"
                     + " WHERE"
-                    + " A.DT_INICIO BETWEEN TO_DATE(?, 'DD-MM-YYYY') AND TO_DATE(?, 'DD-MM-YYYY')";
+                    + " A.DT_INICIO BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')";
             return jdbcTemplate.queryForList(sqlQuery, startDate, endDate);
 
     }
