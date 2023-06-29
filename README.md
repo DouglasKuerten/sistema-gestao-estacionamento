@@ -28,6 +28,7 @@
 <code>[Popular Tabelas](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/src/main/resources/changelogs/inserts.sql)</code>
 
 ### Objetos de BD (stored procedure, triggers e functions):
+<code>[Objetos de BD](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento/src/main/resources/changelogs)</code>
 
 ### Código do sistema:
 ##### &nbsp;&nbsp;[Banco](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/tree/main/estacionamento)
@@ -47,6 +48,32 @@
 
 [![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/cbbbe222-a9bf-46c1-98cc-0eeed19034a4)](https://vitejs.dev/) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Foo](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/assets/101675688/4e9a5f9c-6580-41f8-9631-6d74e34b46eb)](https://tailwindcss.com/)
+
+---
+
+## Como criar a aplicação:
+
+  * Fazer um clone do projeto
+  ### Banco - Oracle - Docker
+  Requisitos: Ter o docker instalado;
+
+  <code>[Abrir esse arquivo pelo navegador do windows/linux/mac(Verificar a pasta no arquivo run.bat, tem que ser o mesmo lugar que ele estiver instalado)](https://github.com/DouglasKuerten/sistema-gestao-estacionamento/blob/main/estacionamento/docker/run.bat)</code>
+
+  Irá criar um container no docker para ser usado como banco na aplicação;
+
+  ### Backend - Java - SpringBoot
+  Requisitos: Ter o java 17 instalado na máquina;
+
+  caso não tenha: <code>[Vídeo explicando a instalar](https://www.youtube.com/watch?v=QekeJBShCy4)</code>
+
+  Para rodar o projeto pelo visual studio code, precisa baixar a extensão do springBoot dashboard;
+  
+  Com ela instalada, vai ser localizado o app java no projeto para ser inicializado, podendo já ser usada as apis do sistema;
+
+  ### Frontend - React
+  Requisitos: Ter o node instalado;
+
+  Abrir a pasta /front-end/ pelo vscode para primeiro fazer as instalações das dependências para depois fazer o npm run dev;
 
 ---
 
