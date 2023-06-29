@@ -1,4 +1,4 @@
-package satc.estacionamento;
+package satc.estacionamento.getMapping;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author gustavo
  */
 @RestController
-@RequestMapping("/TarifaPeloBloco/{bloco}")
+@RequestMapping("/tarifaPeloBloco/{bloco}")
 public class TarifaPeloBloco {
     private final JdbcTemplate jdbcTemplate;
 

@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package satc.estacionamento;
+package satc.estacionamento.controller;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,8 +70,17 @@ public class VeiculoController {
     }
 
     @RequestMapping(value = "/veiculo/{idVeiculo}", method = RequestMethod.DELETE)
-    public void deleteVeiculo(@PathVariable("idVeiculo") int idVeiculo) {
-        String sql = "DELETE FROM VEICULO WHERE ID_VEICULO = ?";
-        jdbcTemplate.update(sql, idVeiculo);
+    public ResponseEntity<String> deleteVeiculo(@PathVariable("idVeiculo") int idVeiculo) {
+        try {
+            String sql = "DELETE FROM VEICULO WHERE ID_VEICULO = ?";
+            jdbcTemplate.queryForList(sql, idVeiculo);
+
+            return ResponseEntity.ok("Veiculo deletado com sucesso");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Problema para deletar o veiculo: " + e.getMessage());
+        }
     }
 }

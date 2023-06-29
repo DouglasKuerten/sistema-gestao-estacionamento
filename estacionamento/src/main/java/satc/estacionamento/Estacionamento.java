@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
  *
  * @author gusta
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "satc.estacionamento")
 @EnableWebMvc
 @Configuration
 public class Estacionamento {

@@ -1,4 +1,4 @@
-package satc.estacionamento;
+package satc.estacionamento.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -21,19 +21,19 @@ public class EstacionamentoController {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    @RequestMapping(value = "/estaciomento", method = RequestMethod.GET)
+    @RequestMapping(value = "/estacionamento", method = RequestMethod.GET)
     public List<Map<String, Object>> getAllEstacionamento(){
         String sql = "SELECT * FROM estacionamento";
         return jdbcTemplate.queryForList(sql);
     }
     
-    @RequestMapping(value = "/estaciomento/{idEstaciomento}", method = RequestMethod.GET)
+    @RequestMapping(value = "/estacionamento/{idEstaciomento}", method = RequestMethod.GET)
     public List<Map<String, Object>> GetById(@PathVariable(value = "idEstaciomento") String id) throws Exception{
         String sql = "SELECT * FROM estacionamento where ID_ESTACIONAMENTO = ?";
-        return jdbcTemplate.queryForList(sql);
+        return jdbcTemplate.queryForList(sql, id);
     }
 
-    @RequestMapping(value = "/estaciomento", method =  RequestMethod.POST)
+    @RequestMapping(value = "/estacionamento", method =  RequestMethod.POST)
     public List<Map<String, Object>> Post(@RequestBody Map<String, Object> requestBody) throws Exception{
         String dsNome = (String) requestBody.get("DS_NOME");
         String dsSigla = (String) requestBody.get("DS_SIGLA");
@@ -45,7 +45,7 @@ public class EstacionamentoController {
         return insertedData;
     }
 
-    @RequestMapping(value = "/estaciomento/{idEstaciomento}", method =  RequestMethod.PUT)
+    @RequestMapping(value = "/estacionamento/{idEstaciomento}", method =  RequestMethod.PUT)
     public List<Map<String, Object>> put(@PathVariable("idEstaciomento") int idEstaciomento, @RequestBody Map<String, Object> requestBody) throws Exception {
         String dsNome = (String) requestBody.get("DS_NOME");
         String dsSigla = (String) requestBody.get("DS_SIGLA");
@@ -59,7 +59,7 @@ public class EstacionamentoController {
         return updatedData;
     }
 
-    @RequestMapping(value = "/estaciomento/{idEstaciomento}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/estacionamento/{idEstaciomento}", method = RequestMethod.DELETE)
     public void delete(@PathVariable("idEstaciomento") int idEstaciomento) throws Exception {
         String sql = "DELETE FROM estacionamento WHERE ID_ESTACIONAMENTO = ?";
         jdbcTemplate.update(sql, idEstaciomento);

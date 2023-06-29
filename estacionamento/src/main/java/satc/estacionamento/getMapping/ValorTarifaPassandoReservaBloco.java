@@ -1,4 +1,4 @@
-package satc.estacionamento;
+package satc.estacionamento.getMapping;
 
 import java.util.List;
 import java.util.Map;
