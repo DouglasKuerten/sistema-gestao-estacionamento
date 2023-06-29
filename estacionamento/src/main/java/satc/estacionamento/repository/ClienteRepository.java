@@ -1,7 +1,7 @@
 package satc.estacionamento.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import satc.estacionamento.entityDTO.Cliente;
+import satc.estacionamento.model.Cliente;
 
 /**
  *

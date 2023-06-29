@@ -1,6 +1,5 @@
-package satc.estacionamento.entityDTO;
+package satc.estacionamento.model;
 
-import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,16 +12,13 @@ import lombok.NoArgsConstructor;
  * @author gusta
  */
 @Entity
-@Table(name = "cliente")
+@Table(name = "tipo_socio")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente{
+public class TipoSocio{
     @Id
-    private long idCliente;
+    private long idTipos;
     private String dsNome;
-    private String dsTelefone;
-    private String dsEmail;
-    private String endereco;
-    private LocalDate dtCadastro;
+    private Long valor;
 }

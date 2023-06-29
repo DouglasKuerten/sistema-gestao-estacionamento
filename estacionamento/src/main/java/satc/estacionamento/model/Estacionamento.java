@@ -1,4 +1,4 @@
-package satc.estacionamento.entityDTO;
+package satc.estacionamento.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
