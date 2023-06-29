@@ -1,4 +1,4 @@
-package satc.estacionamento.entityDTO;
+package satc.estacionamento.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,16 +14,18 @@ import lombok.NoArgsConstructor;
  * @author gusta
  */
 @Entity
-@Table(name = "tarifa")
+@Table(name = "pagamento")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tarifa{
+public class Pagamento{
     @Id
-    private long idTarifa;
+    private long idPagamento;
     @ManyToOne
-    @JoinColumn(name = "id_bloco")
-    private Bloco bloco;
-    private String descricao;
-    private Long precoHora;
+    @JoinColumn(name = "id_reserva")
+    private Reserva reserva;
+    @ManyToOne
+    @JoinColumn(name = "id_socio")
+    private Socio socio;
+    private Long valor;
 }

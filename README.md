@@ -77,16 +77,21 @@ SELECT
 </code>
 
 * Pergunta: Quais são o top 5 pagamentos de clientes cadastrados?
-
+  
+Solução em SQL:
 <code>
-SELECT D.DS_NOME, 
-       A.VALOR 
-FROM pagamento A
-  INNER JOIN reserva B ON B.ID_RESERVA = A.ID_RESERVA
-  INNER JOIN veiculo C ON C.ID_VEICULO = B.ID_VEICULO
-  LEFT JOIN cliente D ON D.ID_CLIENTE = C.ID_CLIENTE
-WHERE ROWNUM <= 5
-ORDER BY VALOR DESC
+SELECT 
+    D.DS_NOME, 
+    A.VALOR 
+  FROM pagamento A
+ INNER JOIN reserva B 
+    ON B.ID_RESERVA = A.ID_RESERVA
+ INNER JOIN veiculo C 
+    ON C.ID_VEICULO = B.ID_VEICULO
+ LEFT JOIN cliente D 
+    ON D.ID_CLIENTE = C.ID_CLIENTE
+ WHERE ROWNUM <= 5
+ ORDER BY VALOR DESC
 </code>
 
 * Pergunta: Quais são os veículos registrados por um determinado cliente?
@@ -116,4 +121,39 @@ SELECT
     ON (SOCIO.ID_TIPOS = TIPO_SOCIO.ID_TIPOS)
  WHERE SOCIO.DT_FIM >= SYSDATE
  ORDER BY DT_INICIO;
+</code>
+
+* Pergunta: Em que estacionamento e bloco os carros dos cliente com reserva ativa estão estacionados?
+
+Solução em SQL: 
+<code>
+SELECT 
+    NVL(C.DS_NOME, 'NÃO CADASTRADO') AS NOME_CLIENTE, 
+    V.DS_PLACA, 
+    V.DS_MODELO, 
+    B.DS_NOME, 
+    E.DS_NOME
+  FROM CLIENTE C 
+ RIGHT JOIN VEICULO V
+    ON C.ID_CLIENTE = V.ID_VEICULO 
+ INNER JOIN RESERVA R 
+    ON R.ID_VEICULO = V.ID_VEICULO
+ INNER JOIN BLOCO B 
+    ON B.ID_BLOCO = R.ID_BLOCO
+ INNER JOIN ESTACIONAMENTO E
+    ON E.ID_ESTACIONAMENTO = B.ID_ESTACIONAMENTO
+ WHERE R.STATUS LIKE '%ATV%'
+</code>
+
+* Pergunta: Quais os blocos que mais receberam cliente?
+
+Solução em SQL:
+<code>
+SELECT DISTINCT 
+     B.ID_BLOCO, 
+     B.DS_NOME, COUNT(R.ID_BLOCO) OVER(PARTITION BY R.ID_BLOCO) AS TOTAL_RECEBIDO
+   FROM BLOCO B 
+  INNER JOIN RESERVA R
+      ON B.ID_BLOCO = R.ID_BLOCO
+  ORDER BY B.ID_BLOCO, B.DS_NOME, TOTAL_RECEBIDO 
 </code>

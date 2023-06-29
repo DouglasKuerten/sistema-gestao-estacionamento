@@ -1,5 +1,6 @@
-package satc.estacionamento.entityDTO;
+package satc.estacionamento.model;
 
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,18 +15,18 @@ import lombok.NoArgsConstructor;
  * @author gusta
  */
 @Entity
-@Table(name = "bloco")
+@Table(name = "veiculo")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bloco{
+public class Veiculo{
     @Id
-    private long idBloco;
+    private long idVeiculo;
     @ManyToOne
-    @JoinColumn(name = "id_estacionamento")
-    private Estacionamento estacionamento;
-    private String dsNome;
-    private String dsSigla;
-    private Long vagasTotais;
-    private String descricao;
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    private String dsPlaca;
+    private String dsModelo;
+    private String dsCor;
+    private LocalDate dtCadastro;
 }
