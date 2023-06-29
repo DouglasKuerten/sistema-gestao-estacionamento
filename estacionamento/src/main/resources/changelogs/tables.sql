@@ -39,7 +39,6 @@
 
    COMMENT ON COLUMN "CLIENTE"."ID_CLIENTE" IS 'PK Veiculo';
    COMMENT ON TABLE "CLIENTE"  IS 'Cadastro de Clientes';
-  ;
 --------------------------------------------------------
 --  Constraints for Table CLIENTE
 --------------------------------------------------------
