@@ -1,0 +1,16 @@
+CREATE OR REPLACE
+FUNCTION RETORNA_CLIENTE(v_cliente IN NUMBER DEFAULT 0) RETURN VARCHAR2 IS
+  v_result VARCHAR2(100);
+BEGIN
+  SELECT CONCAT(id_cliente, CONCAT(' - ', ds_nome))
+  INTO v_result
+  FROM cliente
+  WHERE id_cliente = v_cliente;
+
+  RETURN v_result;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN NULL;
+  WHEN TOO_MANY_ROWS THEN
+    RETURN NULL;
+END;
