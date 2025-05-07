@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +23,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Bloco {
     @Id
-    private long idBloco;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_bloco")
+    @SequenceGenerator(name = "seq_bloco", sequenceName = "seq_bloco", allocationSize = 1)
+    private long id;
     @ManyToOne
     @JoinColumn(name = "id_estacionamento")
     private Estacionamento estacionamento;

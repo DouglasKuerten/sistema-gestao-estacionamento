@@ -1,4 +1,4 @@
-package satc.estacionamento.getMapping;
+package satc.estacionamento.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import satc.estacionamento.model.Cliente;
@@ -20,18 +20,17 @@ import satc.estacionamento.repository.VeiculoRepository;
  * @author gusta
  */
 @RestController
-@RequestMapping(value = "clienteVeiculos")
-public class ClienteVeiculos {
+public class ClienteVeiculosController {
 
     private final ClienteRepository clienteRepository;
     private final VeiculoRepository veiculoRepository;
 
-    public ClienteVeiculos(ClienteRepository clienteRepository, VeiculoRepository veiculoRepository) {
+    public ClienteVeiculosController(ClienteRepository clienteRepository, VeiculoRepository veiculoRepository) {
         this.clienteRepository = clienteRepository;
         this.veiculoRepository = veiculoRepository;
     }
 
-    @GetMapping
+    @RequestMapping(value = "/clienteVeiculos", method = RequestMethod.GET)
     public List<Map<String, Object>> clienteVeiculos() {
         List<Map<String, Object>> result = new ArrayList<>();
 

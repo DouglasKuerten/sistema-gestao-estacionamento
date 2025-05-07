@@ -1,11 +1,8 @@
 package satc.estacionamento.model;
 
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +18,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Veiculo {
     @Id
-    private long idVeiculo;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_veiculo")
+    @SequenceGenerator(name = "seq_veiculo", sequenceName = "seq_veiculo", allocationSize = 1)
+    private long id;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
