@@ -17,12 +17,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente{
+public class Cliente {
     @Id
     private long idCliente;
-    private String dsNome;
-    private String dsTelefone;
-    private String dsEmail;
+    private String nome;
+    private String telefone;
+    private String email;
     private String endereco;
-    private LocalDate dtCadastro;
+    private LocalDate dataCadastro;
 }

@@ -18,10 +18,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pagamento{
+public class Pagamento {
     @Id
-    private long idPagamento;
-    @ManyToOne
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pagamento")
+    @SequenceGenerator(name = "seq_pagamento", sequenceName = "seq_pagamento", allocationSize = 1)
+    private long id;
+    @OneToOne
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;
     @ManyToOne

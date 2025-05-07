@@ -19,16 +19,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Socio{
+public class Socio {
     @Id
-    private long idSocio;
-    @ManyToOne
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_socio")
+    @SequenceGenerator(name = "seq_socio", sequenceName = "seq_socio", allocationSize = 1)
+    private long id;
+    @OneToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
     @ManyToOne
     @JoinColumn(name = "id_tipo")
     private TipoSocio tipo;
     private String status;
-    private LocalDate dtInicio;
-    private LocalDate dtFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
 }

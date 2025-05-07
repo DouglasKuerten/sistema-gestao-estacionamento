@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Estacionamento{
+public class Estacionamento {
     @Id
     private long idEstacionamento;
-    private String dsNome;
-    private String dsSigla;
+    private String nome;
+    private String sigla;
     private Long vagasTotais; 
 }

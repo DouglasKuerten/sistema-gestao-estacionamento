@@ -18,14 +18,14 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Bloco{
+public class Bloco {
     @Id
     private long idBloco;
     @ManyToOne
     @JoinColumn(name = "id_estacionamento")
     private Estacionamento estacionamento;
-    private String dsNome;
-    private String dsSigla;
+    private String nome;
+    private String sigla;
     private Long vagasTotais;
     private String descricao;
 }

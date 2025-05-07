@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tarifa{
+public class Tarifa {
     @Id
     private long idTarifa;
     @ManyToOne

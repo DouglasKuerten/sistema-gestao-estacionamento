@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reserva{
+public class Reserva {
     @Id
     private long idReserva;
     @ManyToOne
@@ -28,7 +28,7 @@ public class Reserva{
     @ManyToOne
     @JoinColumn(name = "id_veiculo")
     private Veiculo veiculo;
-    private LocalDate dtInicio;
-    private LocalDate dtFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private String status;
 }

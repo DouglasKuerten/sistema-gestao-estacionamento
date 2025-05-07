@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoSocio{
+public class TipoSocio {
     @Id
     private long idTipos;
     private String dsNome;

@@ -13,7 +13,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableWebMvc
 @Configuration
 public class Estacionamento {
-
     public static void main(String[] args) {
         SpringApplication.run(Estacionamento.class, args);
     }
