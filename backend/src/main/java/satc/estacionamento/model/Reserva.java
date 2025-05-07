@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reserva{
+public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_reserva")
     @SequenceGenerator(name = "seq_reserva", sequenceName = "seq_reserva", allocationSize = 1)
@@ -27,7 +27,7 @@ public class Reserva{
     @ManyToOne
     @JoinColumn(name = "id_veiculo")
     private Veiculo veiculo;
-    private LocalDate dtInicio;
-    private LocalDate dtFim;
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
     private String status;
 }

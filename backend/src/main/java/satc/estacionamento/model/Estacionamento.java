@@ -1,7 +1,8 @@
 package satc.estacionamento.model;
 
-import javax.persistence.*;
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Estacionamento{
+public class Estacionamento {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_estacionamento")
-    @SequenceGenerator(name = "seq_estacionamento", sequenceName = "seq_estacionamento", allocationSize = 1)
-    private long id;
-    private String dsNome;
-    private String dsSigla;
+    private long idEstacionamento;
+    private String nome;
+    private String sigla;
     private Long vagasTotais; 
 }

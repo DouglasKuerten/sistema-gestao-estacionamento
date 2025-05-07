@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tarifa{
+public class Tarifa {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tarifa")
     @SequenceGenerator(name = "seq_tarifa", sequenceName = "seq_tarifa", allocationSize = 1)

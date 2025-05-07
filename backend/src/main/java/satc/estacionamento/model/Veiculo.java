@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Veiculo{
+public class Veiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_veiculo")
     @SequenceGenerator(name = "seq_veiculo", sequenceName = "seq_veiculo", allocationSize = 1)
@@ -24,8 +24,8 @@ public class Veiculo{
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    private String dsPlaca;
-    private String dsModelo;
-    private String dsCor;
-    private LocalDate dtCadastro;
+    private String placa;
+    private String modelo;
+    private String cor;
+    private LocalDate dataCadastro;
 }
