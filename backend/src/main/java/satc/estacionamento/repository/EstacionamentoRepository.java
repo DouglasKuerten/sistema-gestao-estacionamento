@@ -13,8 +13,8 @@ import java.util.List;
 public interface EstacionamentoRepository extends JpaRepository<Estacionamento, Long> {
     
     // Encontrar estacionamentos por nome
-    List<Estacionamento> findByDsNomeContaining(String nome);
+    List<Estacionamento> findByNomeContaining(String nome);
     
     // Encontrar estacionamentos por sigla
-    List<Estacionamento> findByDsSigla(String sigla);
+    List<Estacionamento> findBySigla(String sigla);
 }

@@ -1,17 +1,11 @@
 package satc.estacionamento.model;
 
 import java.time.LocalDate;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author gusta
- */
 @Entity
 @Table(name = "cliente")
 @Data
@@ -19,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Cliente {
     @Id
-    private long idCliente;
+    private long id;
     private String nome;
     private String telefone;
     private String email;

@@ -50,14 +50,14 @@ public class ClienteVeiculos {
             // Create a map for each client with their vehicles
             Map<String, Object> clienteMap = new HashMap<>();
             clienteMap.put("id_Cliente", cliente.getId());
-            clienteMap.put("ds_nome", cliente.getDsNome());
-            clienteMap.put("ds_telefone", cliente.getDsTelefone());
-            clienteMap.put("ds_email", cliente.getDsEmail());
+            clienteMap.put("ds_nome", cliente.getNome());
+            clienteMap.put("ds_telefone", cliente.getTelefone());
+            clienteMap.put("ds_email", cliente.getEmail());
             clienteMap.put("endereco", cliente.getEndereco());
 
             // Join vehicle plates with comma
             String placas = veiculos.stream()
-                    .map(Veiculo::getDsPlaca)
+                    .map(Veiculo::getPlaca)
                     .sorted()
                     .collect(Collectors.joining(", "));
 
