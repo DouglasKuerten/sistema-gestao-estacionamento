@@ -18,7 +18,7 @@ public interface SocioRepository extends JpaRepository<Socio, Long> {
     List<Socio> findByCliente(Cliente cliente);
     
     // Encontrar sócios ativos (com data de fim maior que a data atual)
-    List<Socio> findByDtFimGreaterThanEqual(LocalDate data);
+    List<Socio> findByDataFimGreaterThanEqual(LocalDate data);
     
     // Encontrar sócios por status
     List<Socio> findByStatus(String status);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("rankEstacionamento")
+// TODO: método já existe em RankEstacionamentoController, excluir arquivo aqui
 public class RankEstacionamento {
 
     private final JdbcTemplate jdbcTemplate;

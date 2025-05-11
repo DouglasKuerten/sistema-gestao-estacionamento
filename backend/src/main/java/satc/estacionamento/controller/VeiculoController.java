@@ -1,86 +1,66 @@
 package satc.estacionamento.controller;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import org.springframework.http.HttpStatus;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import satc.estacionamento.model.Veiculo;
+import satc.estacionamento.services.VeiculoService;
 
-/**
- *
- * @author gustavo
- */
 @RestController
+@RequestMapping("/veiculo")
 public class VeiculoController {
-    private final JdbcTemplate jdbcTemplate;
+    @Autowired
+    VeiculoService veiculoService;
 
-    public VeiculoController(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-    
-    @RequestMapping(value = "/veiculo", method = RequestMethod.GET)
-    public List<Map<String, Object>> getAllVeiculo(){
-        String sql = "SELECT * FROM VEICULO";
-        return jdbcTemplate.queryForList(sql);
-    }
-    
-    @RequestMapping(value = "/veiculo/{idVeiculo}", method = RequestMethod.GET)
-    public List<Map<String, Object>> getVeiculoById(@PathVariable(value = "idVeiculo") int idVeiculo) {
-        String sql = "SELECT * FROM VEICULO WHERE ID_VEICULO = ?";
-        return jdbcTemplate.queryForList(sql, idVeiculo);
+    @GetMapping
+    public ResponseEntity<List<Veiculo>> listarTodos() {
+        List<Veiculo> veiculos = veiculoService.listarTodos();
+        return ResponseEntity.ok(veiculos);
     }
 
-    @RequestMapping(value = "/veiculo", method = RequestMethod.POST)
-    public List<Map<String, Object>> createVeiculo(@RequestBody Map<String, Object> requestBody) {
-        String dsPlaca = (String) requestBody.get("DS_PLACA");
-        String dsModelo = (String) requestBody.get("DS_MODELO");
-        String dsCor = (String) requestBody.get("DS_COR");
-        String dtCadastro = (String) requestBody.get("DT_CADASTRO");
-        dtCadastro = "TO_DATE('" + dtCadastro + "', 'YYYY-MM-DD HH24:MI')";
-        int idCliente = (int) requestBody.get("ID_CLIENTE");
-
-        String sql = "INSERT INTO VEICULO (DS_PLACA, DS_MODELO, DS_COR, DT_CADASTRO, ID_CLIENTE) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.execute("INSERT INTO VEICULO (DS_PLACA, DS_MODELO, DS_COR, DT_CADASTRO, ID_CLIENTE) VALUES ('" + dsPlaca + "', '" + dsModelo + "', '" + dsCor + "', " + dtCadastro + ", " + idCliente + ")");
-
-        String selectSql = "SELECT * FROM VEICULO WHERE ID_CLIENTE = ?";
-        List<Map<String, Object>> insertedData = jdbcTemplate.queryForList(selectSql, idCliente);
-        return insertedData;
+    @GetMapping("{id}")
+    public ResponseEntity<Veiculo> buscarPorId(@PathVariable Long id) {
+        return veiculoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @RequestMapping(value = "/veiculo/{idVeiculo}", method = RequestMethod.PUT)
-    public List<Map<String, Object>> updateVeiculo(@PathVariable("idVeiculo") int idVeiculo, @RequestBody Map<String, Object> requestBody) {
-        String dsPlaca = (String) requestBody.get("DS_PLACA");
-        String dsModelo = (String) requestBody.get("DS_MODELO");
-        String dsCor = (String) requestBody.get("DS_COR");
-        LocalDate dtCadastro = LocalDate.now();  // Assuming current date as the registration date
-        int idCliente = (int) requestBody.get("ID_CLIENTE");
-
-        String sql = "UPDATE VEICULO SET DS_PLACA = ?, DS_MODELO = ?, DS_COR = ?, DT_CADASTRO = ?, ID_CLIENTE = ? WHERE ID_VEICULO = ?";
-        jdbcTemplate.update(sql, dsPlaca, dsModelo, dsCor, dtCadastro, idCliente, idVeiculo);
-
-        String selectSql = "SELECT * FROM VEICULO WHERE ID_VEICULO = ?";
-        List<Map<String, Object>> updatedData = jdbcTemplate.queryForList(selectSql, idVeiculo);
-        return updatedData;
+    @PostMapping
+    public ResponseEntity<Veiculo> criar(@RequestBody Veiculo veiculo) {
+        Veiculo veiculoNovo = veiculoService.salvar(veiculo);
+        return ResponseEntity.ok(veiculoNovo);
     }
 
-    @RequestMapping(value = "/veiculo/{idVeiculo}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteVeiculo(@PathVariable("idVeiculo") int idVeiculo) {
-        try {
-            String sql = "DELETE FROM VEICULO WHERE ID_VEICULO = ?";
-            jdbcTemplate.queryForList(sql, idVeiculo);
-
-            return ResponseEntity.ok("Veiculo deletado com sucesso");
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                                 .body("Problema para deletar o veiculo: " + e.getMessage());
+    @PutMapping("{id}")
+    public ResponseEntity<Veiculo> alterar(@PathVariable Long id, @RequestBody Veiculo veiculo) {
+        if (veiculoService.buscarPorId(id).isPresent()) {
+            Veiculo veiculoAtualizado = veiculoService.salvar(veiculo);
+            return ResponseEntity.ok(veiculoAtualizado);
         }
+        return ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        if (veiculoService.buscarPorId(id).isPresent()) {
+            veiculoService.excluir(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("placa/{placa}")
+    public ResponseEntity<Veiculo> buscarPorPlaca(@PathVariable String placa) {
+        return veiculoService.buscarPorPlaca(placa)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+// TODO: Finalizar método de buscar veiculos estacionados
+//    @GetMapping("veiculos/estacionados")
+//    public ResponseEntity<List<Veiculo>> listarVeiculosEstacionados() {
+//        List<Veiculo> veiculosEstacionados = veiculoService
+//    }
 }

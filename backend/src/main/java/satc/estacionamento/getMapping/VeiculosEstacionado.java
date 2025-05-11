@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("veiculosEstacionados")
+// TODO: método já existe em VeiculosEstacionadosController, excluir arquivo aqui
 public class VeiculosEstacionado {
     private final JdbcTemplate jdbcTemplate;
 

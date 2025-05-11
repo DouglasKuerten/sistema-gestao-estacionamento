@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author gusta
  */
+// TODO: Remover esse arquivo, método não é necessário
+// Método já existe em VeiculoController @GetMapping("placa/{placa}")
 @RestController
 @RequestMapping("/placaRetornaDados/{placa}")
 public class PlacaRetornaDados {

@@ -14,7 +14,7 @@ import java.util.List;
 public interface TarifaRepository extends JpaRepository<Tarifa, Long> {
     
     // Encontrar tarifas por bloco
-    List<Tarifa> findByBloco(Bloco bloco);
+    List<Tarifa> findByIdBloco(Long idBloco);
     
     // Encontrar tarifas por descrição contendo um texto
     List<Tarifa> findByDescricaoContaining(String descricao);

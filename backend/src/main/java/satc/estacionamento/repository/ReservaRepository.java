@@ -29,12 +29,15 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     List<Reserva> findByStatusContaining(String status);
     
     // Encontrar reservas que começam após uma data
-    List<Reserva> findByDtInicioGreaterThanEqual(LocalDate data);
+    List<Reserva> findByDataInicioGreaterThanEqual(LocalDate data);
     
     // Encontrar reservas que terminam antes de uma data
-    List<Reserva> findByDtFimLessThanEqual(LocalDate data);
+    List<Reserva> findByDataFimLessThanEqual(LocalDate data);
     
     // Encontrar reservas ativas em um período específico
-    List<Reserva> findByStatusAndDtInicioLessThanEqualAndDtFimGreaterThanEqual(
+    List<Reserva> findByStatusAndDataInicioLessThanEqualAndDataFimGreaterThanEqual(
             String status, LocalDate dataFim, LocalDate dataInicio);
+
+    // Encontrar reservas por status e placa
+    List<Reserva> findByStatusEqualAndPlacaEqual(String status, String placa);
 }

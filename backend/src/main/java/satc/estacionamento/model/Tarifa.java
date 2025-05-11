@@ -1,15 +1,10 @@
 package satc.estacionamento.model;
 
 import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author gusta
- */
 @Entity
 @Table(name = "tarifa")
 @Data

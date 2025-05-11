@@ -2,15 +2,10 @@ package satc.estacionamento.model;
 
 import java.time.LocalDate;
 import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- *
- * @author gusta
- */
 @Entity
 @Table(name = "veiculo")
 @Data
@@ -24,6 +19,7 @@ public class Veiculo {
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
+    @Column(nullable = false)
     private String placa;
     private String modelo;
     private String cor;
