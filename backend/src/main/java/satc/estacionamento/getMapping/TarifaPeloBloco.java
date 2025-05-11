@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/tarifaPeloBloco/{bloco}")
+// TODO: Remover arquivo, método não é necessário
+// Método já disponível em TarifaController @GetMapping("bloco/{id}")
 public class TarifaPeloBloco {
     private final JdbcTemplate jdbcTemplate;
 

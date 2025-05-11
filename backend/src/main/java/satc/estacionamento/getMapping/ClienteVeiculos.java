@@ -19,6 +19,9 @@ import satc.estacionamento.repository.VeiculoRepository;
  *
  * @author gusta
  */
+
+// TODO: Apagar arquivo, método não é necessário
+// Mesmo método está em ClienteController (@GetMapping("{id}/veiculos"))
 @RestController
 @RequestMapping(value = "clienteVeiculos")
 public class ClienteVeiculos {
