@@ -12,9 +12,6 @@ import java.util.List;
 @Repository
 public interface EstacionamentoRepository extends JpaRepository<Estacionamento, Long> {
     
-    // Encontrar estacionamentos por nome
-    List<Estacionamento> findByNomeContaining(String nome);
-    
     // Encontrar estacionamentos por sigla
     List<Estacionamento> findBySigla(String sigla);
 }

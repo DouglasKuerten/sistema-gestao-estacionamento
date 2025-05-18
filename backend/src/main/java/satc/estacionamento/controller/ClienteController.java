@@ -1,22 +1,29 @@
 package satc.estacionamento.controller;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import satc.estacionamento.dto.ClientesVeiculosDTO;
 import satc.estacionamento.model.Cliente;
 import satc.estacionamento.model.Veiculo;
 import satc.estacionamento.services.ClienteService;
+import satc.estacionamento.services.VeiculoClienteService;
 import satc.estacionamento.services.VeiculoService;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
     @Autowired
-    ClienteService clienteService;
+    private ClienteService clienteService;
 
     @Autowired
-    VeiculoService veiculoService;
+    private VeiculoService veiculoService;
+
+    @Autowired
+    private VeiculoClienteService veiculoClienteService;
 
     @GetMapping
     public ResponseEntity<List<Cliente>> listarTodos() {
@@ -57,10 +64,16 @@ public class ClienteController {
 
     @GetMapping("{id}/veiculos")
     public ResponseEntity<List<Veiculo>> listarVeiculos(@PathVariable Long id) {
-        if (clienteService.buscarPorId(id).isPresent()) {
-            List<Veiculo> veiculos = veiculoService.buscarVeiculosCliente(id);
+        Optional<Cliente> optionalCliente = clienteService.buscarPorId(id);
+        if (optionalCliente.isPresent()) {
+            List<Veiculo> veiculos = veiculoService.buscarVeiculosCliente(optionalCliente.get());
             return ResponseEntity.ok(veiculos);
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("listaTodosClientesVeiculos")
+    public ResponseEntity<List<ClientesVeiculosDTO>> listaTodosClientesVeiculos() {
+        return ResponseEntity.ok(veiculoClienteService.listarVeiculosCliente());
     }
 }

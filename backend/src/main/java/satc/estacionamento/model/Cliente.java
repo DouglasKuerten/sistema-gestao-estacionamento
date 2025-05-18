@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Cliente {
-    @Id
-    private long id;
+public class Cliente extends MasterEntity {
     private String nome;
     private String telefone;
     private String email;

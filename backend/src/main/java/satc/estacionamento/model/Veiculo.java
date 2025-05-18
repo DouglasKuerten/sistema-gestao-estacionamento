@@ -11,15 +11,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Veiculo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_veiculo")
-    @SequenceGenerator(name = "seq_veiculo", sequenceName = "seq_veiculo", allocationSize = 1)
-    private long id;
+public class Veiculo extends MasterEntity{
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String placa;
     private String modelo;
     private String cor;

@@ -1,16 +1,23 @@
 package satc.estacionamento.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import satc.estacionamento.model.Reserva;
 import satc.estacionamento.model.Veiculo;
 import satc.estacionamento.repository.ReservaRepository;
+import satc.estacionamento.repository.VeiculoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ReservaService {
+
     @Autowired
-    ReservaRepository reservaRepository;
+    private ReservaRepository reservaRepository;
+
+    @Autowired
+    private VeiculoRepository veiculoRepository;
 
     public List<Reserva> listarTodos() {
         return reservaRepository.findAll();
@@ -29,6 +36,10 @@ public class ReservaService {
     }
 
     public List<Reserva> listarReservasAtivaPorPlaca(String placa) {
-        return reservaRepository.findByStatusEqualAndPlacaEqual("A", placa);
+        Optional<Veiculo> veiculo = veiculoRepository.findByPlaca(placa);
+        if (veiculo.isEmpty()){
+            throw new IllegalArgumentException("Placa não encontrada");
+        }
+        return reservaRepository.findByStatusAndVeiculo("A", veiculo.get());
     }
 }

@@ -1,19 +1,25 @@
 package satc.estacionamento.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import satc.estacionamento.dto.RelatorioReservaDTO;
 import satc.estacionamento.model.Estacionamento;
 import satc.estacionamento.services.EstacionamentoService;
+import satc.estacionamento.services.RankEstacionamentoService;
 
 @RestController
 @RequestMapping("/estacionamento")
 public class EstacionamentoController {
     @Autowired
-    EstacionamentoService estacionamentoService;
+    private EstacionamentoService estacionamentoService;
+
+    @Autowired
+    private RankEstacionamentoService rankEstacionamentoService;
 
     @GetMapping
     public ResponseEntity<List<Estacionamento>> listarTodos() {
@@ -26,6 +32,11 @@ public class EstacionamentoController {
         return estacionamentoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping(value = "/rank/{dataInicial}/{dataFinal}")
+    public ResponseEntity<List<RelatorioReservaDTO>> getPlacaRetornaVeiculoClienteReserva(@PathVariable("dataInicial") LocalDate dataInicial, @PathVariable("dataFinal") LocalDate dataFinal) {
+        return ResponseEntity.ok(rankEstacionamentoService.obterRankEstacionamento(dataInicial, dataFinal));
     }
 
     @PostMapping

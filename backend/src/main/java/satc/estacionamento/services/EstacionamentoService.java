@@ -1,15 +1,18 @@
 package satc.estacionamento.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import satc.estacionamento.model.Estacionamento;
 import satc.estacionamento.repository.EstacionamentoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class EstacionamentoService {
+
     @Autowired
-    EstacionamentoRepository estacionamentoRepository;
+    private EstacionamentoRepository estacionamentoRepository;
 
     public List<Estacionamento> listarTodos() {
         return estacionamentoRepository.findAll();

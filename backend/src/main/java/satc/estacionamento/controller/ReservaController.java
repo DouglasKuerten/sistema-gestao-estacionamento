@@ -3,6 +3,7 @@ package satc.estacionamento.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import satc.estacionamento.model.Reserva;
@@ -12,7 +13,7 @@ import satc.estacionamento.services.ReservaService;
 @RequestMapping("/reserva")
 public class ReservaController {
     @Autowired
-    ReservaService reservaService;
+    private ReservaService reservaService;
 
     @GetMapping
     public ResponseEntity<List<Reserva>> listarTodos() {
@@ -53,7 +54,13 @@ public class ReservaController {
 
     @GetMapping("ativas/{placa}")
     public ResponseEntity<List<Reserva>> listarReservasAtivasPorPlaca(@PathVariable String placa) {
-        List<Reserva> reservas = reservaService.listarReservasAtivaPorPlaca(placa);
-        return ResponseEntity.ok(reservas);
+        try {
+            List<Reserva> reservas = reservaService.listarReservasAtivaPorPlaca(placa);
+            return ResponseEntity.ok(reservas);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }

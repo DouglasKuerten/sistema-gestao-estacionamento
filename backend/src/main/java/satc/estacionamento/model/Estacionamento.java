@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Estacionamento {
-    @Id
-    private long idEstacionamento;
+public class Estacionamento extends MasterEntity{
     private String nome;
     private String sigla;
     private Long vagasTotais; 

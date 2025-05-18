@@ -11,11 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reserva {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_reserva")
-    @SequenceGenerator(name = "seq_reserva", sequenceName = "seq_reserva", allocationSize = 1)
-    private long id;
+public class Reserva extends MasterEntity {
     @ManyToOne
     @JoinColumn(name = "id_bloco")
     private Bloco bloco;
@@ -25,4 +21,6 @@ public class Reserva {
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private String status;
+    @OneToOne
+    private Pagamento pagamento;
 }

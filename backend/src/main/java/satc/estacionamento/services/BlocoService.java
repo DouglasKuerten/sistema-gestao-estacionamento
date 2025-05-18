@@ -1,6 +1,7 @@
 package satc.estacionamento.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import satc.estacionamento.model.Bloco;
 import satc.estacionamento.model.Tarifa;
 import satc.estacionamento.repository.BlocoRepository;
@@ -9,9 +10,11 @@ import satc.estacionamento.repository.TarifaRepository;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class BlocoService {
+
     @Autowired
-    BlocoRepository blocoRepository;
+    private BlocoRepository blocoRepository;
 
     public List<Bloco> listarTodos() {
         return blocoRepository.findAll();

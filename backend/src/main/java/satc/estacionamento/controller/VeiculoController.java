@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import satc.estacionamento.dto.VeiculoEstacionadoDTO;
 import satc.estacionamento.model.Veiculo;
+import satc.estacionamento.services.VeiculoEstacionadoService;
 import satc.estacionamento.services.VeiculoService;
 
 @RestController
 @RequestMapping("/veiculo")
 public class VeiculoController {
+
     @Autowired
-    VeiculoService veiculoService;
+    private VeiculoService veiculoService;
+
+    @Autowired
+    private VeiculoEstacionadoService veiculoEstacionadoService;
 
     @GetMapping
     public ResponseEntity<List<Veiculo>> listarTodos() {
@@ -58,9 +64,8 @@ public class VeiculoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-// TODO: Finalizar método de buscar veiculos estacionados
-//    @GetMapping("veiculos/estacionados")
-//    public ResponseEntity<List<Veiculo>> listarVeiculosEstacionados() {
-//        List<Veiculo> veiculosEstacionados = veiculoService
-//    }
+    @GetMapping("/estacionados")
+    public ResponseEntity<List<VeiculoEstacionadoDTO>> listarEstacionados() {
+        return ResponseEntity.ok(veiculoEstacionadoService.listarVeiculosEstacionados());
+    }
 }

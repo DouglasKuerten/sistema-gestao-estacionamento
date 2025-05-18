@@ -2,20 +2,27 @@ package satc.estacionamento.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import satc.estacionamento.model.Bloco;
 import satc.estacionamento.model.Tarifa;
 import satc.estacionamento.services.BlocoService;
 import satc.estacionamento.services.TarifaService;
+
+import javax.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/tarifa")
 public class TarifaController {
     @Autowired
-    TarifaService tarifaService;
-    BlocoService blocoService;
+    private TarifaService tarifaService;
+
+    @Autowired
+    private BlocoService blocoService;
 
     @GetMapping
     public ResponseEntity<List<Tarifa>> listarTodos() {
@@ -56,10 +63,26 @@ public class TarifaController {
 
     @GetMapping("bloco/{id}")
     public ResponseEntity<List<Tarifa>> listarTarifasPorBloco(@PathVariable Long id) {
-        if (blocoService.buscarPorId(id).isPresent()) {
-            List<Tarifa> tarifas = tarifaService.listarTarifasPorBloco(id);
+        Optional<Bloco> optionalBloco = blocoService.buscarPorId(id);
+        if (optionalBloco.isPresent()) {
+            List<Tarifa> tarifas = tarifaService.listarTarifasPorBloco(optionalBloco.get());
             return ResponseEntity.ok(tarifas);
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/valorTarifaPassandoReservaBloco/{idReserva}/{idBloco}")
+    public ResponseEntity<Long> calcularValorTarifa( @PathVariable Long idReserva, @PathVariable Long idBloco) {
+        try {
+            Long valor = tarifaService.calcularValorCentavos(idReserva, idBloco);
+            return ResponseEntity.ok(valor);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
 }

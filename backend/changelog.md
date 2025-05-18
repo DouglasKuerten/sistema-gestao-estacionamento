@@ -15,3 +15,10 @@
 > Foi realizado a criação dos services para separação de responsabilidade
 
 > Foi alterado os respositorys conforme a necessidade da lógica implementada
+
+## Commit 18/05
+Alterado o `RankEstacionamentoController` para dentro do `EstacionamentoController`
+Alterado o `TarifaReservaController` para dentro do `TarifaController`
+Alterado o `VeiculosEstacionadosController` para dentro do `VeiculosController`
+
+Removido a pasta getMapping e trazendo os metodos para dentro da pasta controller
