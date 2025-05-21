@@ -10,20 +10,12 @@ import java.util.Optional;
 @Repository
 public interface VeiculoRepository extends JpaRepository<Veiculo, Long> {
 
-    
     // Encontrar veículos por cliente
     List<Veiculo> findByCliente(Cliente cliente);
-    
+
     // Encontrar veículo por placa
     Optional<Veiculo> findByPlaca(String placa);
-    
-    // Encontrar veículos por modelo
-    List<Veiculo> findByModeloContaining(String modelo);
-    
+
     // Encontrar veículos que não estão associados a um cliente
     List<Veiculo> findByClienteIsNull();
-    
-    // Encontrar veículos de um cliente específico
-    List<Veiculo> findByIdCliente(Long idCliente);
-
 }

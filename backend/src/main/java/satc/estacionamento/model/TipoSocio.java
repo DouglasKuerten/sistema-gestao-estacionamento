@@ -10,11 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TipoSocio {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tipo_socio")
-    @SequenceGenerator(name = "seq_tipo_socio", sequenceName = "seq_tipo_socio", allocationSize = 1)
-    private long id;
+public class TipoSocio extends MasterEntity{
     private String nome;
     private Long valor;
 }

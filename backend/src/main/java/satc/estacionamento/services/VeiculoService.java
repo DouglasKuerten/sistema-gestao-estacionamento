@@ -1,15 +1,19 @@
 package satc.estacionamento.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import satc.estacionamento.model.Cliente;
 import satc.estacionamento.model.Veiculo;
 import satc.estacionamento.repository.VeiculoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class VeiculoService {
+
     @Autowired
-    VeiculoRepository veiculoRepository;
+    private VeiculoRepository veiculoRepository;
 
     public List<Veiculo> listarTodos() {
         return veiculoRepository.findAll();
@@ -27,15 +31,11 @@ public class VeiculoService {
         veiculoRepository.deleteById(id);
     }
 
-    public List<Veiculo> buscarVeiculosCliente(Long idCliente) {
-        return veiculoRepository.findByIdCliente(idCliente);
+    public List<Veiculo> buscarVeiculosCliente(Cliente cliente) {
+        return veiculoRepository.findByCliente(cliente);
     }
 
     public Optional<Veiculo> buscarPorPlaca(String placa) {
         return veiculoRepository.findByPlaca(placa);
     }
-
-//    public List<Veiculo> listarVeiculosEstacionados() {
-//        return veiculoRepository.findAllEstacionado();
-//    }
 }

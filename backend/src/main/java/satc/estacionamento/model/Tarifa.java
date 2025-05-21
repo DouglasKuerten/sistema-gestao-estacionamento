@@ -10,11 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tarifa {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tarifa")
-    @SequenceGenerator(name = "seq_tarifa", sequenceName = "seq_tarifa", allocationSize = 1)
-    private long id;
+public class Tarifa extends MasterEntity{
     @ManyToOne
     @JoinColumn(name = "id_bloco")
     private Bloco bloco;
