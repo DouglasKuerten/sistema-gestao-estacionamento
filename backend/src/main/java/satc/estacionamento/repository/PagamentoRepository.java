@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Repository
 public interface PagamentoRepository extends JpaRepository<Pagamento, Long> {
-    
+
     // Encontrar pagamentos por reserva
     Pagamento findByReserva(Reserva reserva);
-    
+
     // Encontrar pagamentos por sócio
     List<Pagamento> findBySocio(Socio socio);
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface TipoSocioRepository extends JpaRepository<TipoSocio, Long> {
-    
+
     // Encontrar tipos de sócio por nome
     List<TipoSocio> findByNome(String nome);
 }

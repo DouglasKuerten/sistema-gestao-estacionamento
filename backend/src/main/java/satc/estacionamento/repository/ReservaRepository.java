@@ -17,13 +17,13 @@ import java.util.List;
  */
 @Repository
 public interface ReservaRepository extends JpaRepository<Reserva, Long> {
-    
+
     // Encontrar reservas por bloco
     List<Reserva> findByBloco(Bloco bloco);
-    
+
     // Encontrar reservas por veículo
     List<Reserva> findByVeiculo(Veiculo veiculo);
-    
+
     // Encontrar reservas por status
     List<Reserva> findByStatus(String status);
 

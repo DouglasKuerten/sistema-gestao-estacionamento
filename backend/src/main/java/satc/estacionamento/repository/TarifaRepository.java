@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Repository
 public interface TarifaRepository extends JpaRepository<Tarifa, Long> {
-    
+
     // Encontrar tarifas por bloco
     List<Tarifa> findByBloco(Bloco bloco);
 }

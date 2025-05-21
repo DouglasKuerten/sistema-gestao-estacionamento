@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Repository
 public interface BlocoRepository extends JpaRepository<Bloco, Long> {
-    
+
     // Encontrar blocos por nome
     List<Bloco> findByNome(String nome);
-    
+
     // Encontrar blocos por sigla
     List<Bloco> findBySigla(String sigla);
 }

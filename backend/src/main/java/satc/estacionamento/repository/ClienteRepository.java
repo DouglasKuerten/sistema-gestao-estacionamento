@@ -8,5 +8,5 @@ import satc.estacionamento.model.Cliente;
  * @author gusta
  */
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
-    
+
 }

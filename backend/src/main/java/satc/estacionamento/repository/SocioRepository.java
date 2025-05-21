@@ -13,10 +13,10 @@ import java.util.List;
  */
 @Repository
 public interface SocioRepository extends JpaRepository<Socio, Long> {
-    
+
     // Encontrar sócios por cliente
     Socio findByCliente(Cliente cliente);
-    
+
     // Encontrar sócios por status
     List<Socio> findByStatus(String status);
 }

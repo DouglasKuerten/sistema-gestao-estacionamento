@@ -35,7 +35,9 @@ public class EstacionamentoController {
     }
 
     @GetMapping(value = "/rank/{dataInicial}/{dataFinal}")
-    public ResponseEntity<List<RelatorioReservaDTO>> getPlacaRetornaVeiculoClienteReserva(@PathVariable("dataInicial") LocalDate dataInicial, @PathVariable("dataFinal") LocalDate dataFinal) {
+    public ResponseEntity<List<RelatorioReservaDTO>> getPlacaRetornaVeiculoClienteReserva(
+        @PathVariable("dataInicial") LocalDate dataInicial,
+        @PathVariable("dataFinal") LocalDate dataFinal) {
         return ResponseEntity.ok(rankEstacionamentoService.obterRankEstacionamento(dataInicial, dataFinal));
     }
 
