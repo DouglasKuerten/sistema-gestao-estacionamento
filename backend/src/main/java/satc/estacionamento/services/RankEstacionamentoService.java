@@ -3,8 +3,10 @@ package satc.estacionamento.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import satc.estacionamento.dto.RelatorioReservaDTO;
+import satc.estacionamento.model.Cliente;
 import satc.estacionamento.model.Reserva;
 import satc.estacionamento.model.Tarifa;
+import satc.estacionamento.model.Veiculo;
 import satc.estacionamento.repository.*;
 
 import java.time.Duration;
@@ -39,16 +41,18 @@ public class RankEstacionamentoService {
                     : tarifas.get(0);
 
             long valor = Math.round(tarifa.getPrecoHora() * tempoHoras);
+            Veiculo veiculo = reserva.getVeiculo();
+            Cliente cliente = veiculo.getCliente();
+
 
             return RelatorioReservaDTO.builder()
                     .tempoDecorridoTotal(tempoHoras)
-                    .nomeCliente(reserva.getVeiculo().getCliente().getNome())
-                    .modelo(reserva.getVeiculo().getModelo())
-                    .placa(reserva.getVeiculo().getPlaca())
+                    .nomeCliente(cliente.getNome())
+                    .modelo(veiculo.getModelo())
+                    .placa(veiculo.getPlaca())
                     .valor(valor)
                     .build();
-        }).sorted(Comparator.comparingLong(RelatorioReservaDTO::getTempoDecorridoTotal).reversed())
-            .collect(Collectors.toList());
+        }).sorted(Comparator.comparingLong(RelatorioReservaDTO::getTempoDecorridoTotal).reversed()).collect(Collectors.toList());
 
         AtomicLong counter = new AtomicLong(1);
         relatorio.forEach(dto -> dto.setRank(counter.getAndIncrement()));
